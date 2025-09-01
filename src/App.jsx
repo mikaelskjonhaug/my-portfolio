@@ -5,7 +5,7 @@ import msLogo from "./assets/ms-logo-512.png";
 
 function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 w-full h-[80px] flex items-end justify-between px-8 bg-bg bg-opacity-50 backdrop-blur-md z-50">
+    <nav className="fixed top-0 left-0 w-full h-[60px] flex items-end justify-between px-8 bg-bg bg-opacity-50 backdrop-blur-md z-50">
       {/* Logo left */}
       <img
         src={msLogo}
