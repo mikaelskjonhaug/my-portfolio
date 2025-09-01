@@ -50,11 +50,10 @@ export default function Hero({ name, subheader }) {
 
   return (
     <section
-      className="bg-bg min-h-screen flex flex-col items-center text-center px-6 scale-50 md:scale-100"
+      className="bg-bg min-h-screen flex flex-col items-center text-center px-6 scale-50 md:scale-100 -mt-[200px] md:mt-0"
       style={{
         alignItems: "center",
         justifyContent: "flex-start",
-        marginTop: "-40px",
       }}
     >
       <style>
@@ -88,8 +87,9 @@ export default function Hero({ name, subheader }) {
       {/* Subheader and Icons */}
       {showInfo && (
         <>
+          {/* Subheading */}
           <motion.div
-            className="text-text text-2xl font-medium"
+            className="text-text text-2xl font-medium scale-100 md:scale-100"
             style={{ marginTop: "10px" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: showInfo ? 1 : 0 }}
@@ -98,21 +98,22 @@ export default function Hero({ name, subheader }) {
             {subheader}
           </motion.div>
 
+          {/* Icons */}
           <motion.div
-            className="flex space-x-8"
+            className="flex space-x-8 scale-100 md:scale-100"
             style={{ marginTop: "10px" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: showInfo ? 1 : 0 }}
             transition={{ duration: 0.5 }}
           >
-            <a href="https://github.com/mikaelskjonhaug" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faGithub} size="2x" className="text-text hover:text-accent transition-colors" />
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faGithub} className="text-3xl md:text-2xl text-text hover:text-accent transition-colors" />
             </a>
-            <a href="https://linkedin.com/in/mikaelskjonhaug" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faLinkedin} size="2x" className="text-text hover:text-accent transition-colors" />
+            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faLinkedin} className="text-3xl md:text-2xl text-text hover:text-accent transition-colors" />
             </a>
-            <a href="mailto:mikaelsk@berkeley.edu">
-              <FontAwesomeIcon icon={faEnvelope} size="2x" className="text-text hover:text-accent transition-colors" />
+            <a href="mailto:your@email.com">
+              <FontAwesomeIcon icon={faEnvelope} className="text-3xl md:text-2xl text-text hover:text-accent transition-colors" />
             </a>
           </motion.div>
         </>
