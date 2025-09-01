@@ -2,6 +2,7 @@
 import "./index.css";            // make sure Tailwind is loaded
 import Hero from "./components/hero.jsx"; // <-- import your component
 import msLogo from "./assets/ms-logo-512.png";
+import AboutMe from "./components/about-me.jsx";
 
 function Navbar() {
   return (
@@ -43,13 +44,14 @@ export default function App() {
       <Navbar />
       <main className="pt-[120px]">
         <div className="relative bg-bg min-h-screen">
-          <div className="container py-12">
+          <div className="container py-4">
             {/* hero section */}
             <Hero
               name="Mikael Skjonhaug"
               subheader="AI/ML • SWE • Backend"
               ctaText="View Projects"
             />
+            <AboutMe/>
           </div>
         </div>
       </main>

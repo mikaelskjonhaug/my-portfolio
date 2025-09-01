@@ -118,6 +118,15 @@ export default function Hero({ name, subheader }) {
           </motion.div>
         </>
       )}
+
+      {/* Down Arrow Link */}
+      <a
+        href="#about-me"
+        className="block mx-auto mt-8 text-text hover:text-accent2 transition-colors animate-bounce"
+        style={{ fontSize: "2.5rem" }}
+      >
+        &#8595;
+      </a>
     </section>
   );
 }
