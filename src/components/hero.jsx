@@ -106,13 +106,13 @@ export default function Hero({ name, subheader }) {
             animate={{ opacity: showInfo ? 1 : 0 }}
             transition={{ duration: 0.5 }}
           >
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/mikaelskjonhaug" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faGithub} className="text-3xl md:text-2xl text-text hover:text-accent transition-colors" />
             </a>
-            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+            <a href="https://linkedin.com/in/mikaelskjonhaug" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faLinkedin} className="text-3xl md:text-2xl text-text hover:text-accent transition-colors" />
             </a>
-            <a href="mailto:your@email.com">
+            <a href="mailto:mikaelsk@berkeley.edu">
               <FontAwesomeIcon icon={faEnvelope} className="text-3xl md:text-2xl text-text hover:text-accent transition-colors" />
             </a>
           </motion.div>
@@ -131,36 +131,3 @@ export default function Hero({ name, subheader }) {
   );
 }
 
-function Navbar() {
-  return (
-    <nav className="fixed top-0 left-0 w-full h-[60px] bg-bg bg-opacity-50 backdrop-blur-md z-50">
-      {/* Mobile: logo centered, no links */}
-      <div className="flex justify-center items-center h-full md:hidden">
-        <img
-          src={msLogo}
-          alt="Mikael Skjonhaug logo"
-          className="h-[40px] w-auto"
-          style={{ objectFit: "contain" }}
-        />
-      </div>
-      {/* Desktop/tablet: logo left, links right */}
-      <div className="hidden md:flex items-end justify-between px-8 h-full w-full">
-        <img
-          src={msLogo}
-          alt="Mikael Skjonhaug logo"
-          className="h-[60px] w-auto"
-          style={{ objectFit: "contain" }}
-        />
-        <div
-          className="flex items-end space-x-8"
-          style={{ position: "relative", top: "-5px" }}
-        >
-          <a href="#about" className="text-base font-semibold text-text hover:text-accent transition-colors">About</a>
-          <a href="#experience" className="text-base font-semibold text-text hover:text-accent transition-colors">Experience</a>
-          <a href="#skills" className="text-base font-semibold text-text hover:text-accent transition-colors">Skills</a>
-          <a href="#projects" className="text-base font-semibold text-text hover:text-accent transition-colors">Projects</a>
-        </div>
-      </div>
-    </nav>
-  );
-}
