@@ -5,7 +5,7 @@ import msLogo from "./assets/ms-logo-512.png";
 
 function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 w-full h-[120px] flex items-center justify-between px-8 bg-bg bg-opacity-50 backdrop-blur-md z-50">
+    <nav className="fixed top-0 left-0 w-full h-[80px] flex items-end justify-between px-8 bg-bg bg-opacity-50 backdrop-blur-md z-50">
       {/* Logo left */}
       <img
         src={msLogo}
@@ -14,7 +14,10 @@ function Navbar() {
         style={{ objectFit: "contain" }}
       />
       {/* Nav links right */}
-      <div className="flex space-x-8">
+      <div
+        className="flex items-end space-x-8"
+        style={{ position: "relative", top: "-5px" }}
+      >
         <a href="#about" className="text-base font-semibold text-text hover:text-accent transition-colors">About</a>
         <a href="#experience" className="text-base font-semibold text-text hover:text-accent transition-colors">Experience</a>
         <a href="#skills" className="text-base font-semibold text-text hover:text-accent transition-colors">Skills</a>
