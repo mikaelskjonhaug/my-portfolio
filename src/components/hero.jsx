@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 const accent = "text-accent";      // orange
 const primary = "text-text";      // primary white
 
-export default function Hero({ name }) {
+export default function Hero({ name, subheader }) {
   const letters = name.split("");
   const firstMIdx = letters.findIndex(l => l.toLowerCase() === "m");
   const firstSIdx = letters.findIndex(l => l.toLowerCase() === "s");
   const [typedIdx, setTypedIdx] = useState(-1);
+  const [showInfo, setShowInfo] = useState(false);
 
   useEffect(() => {
     let idx = -1;
@@ -17,9 +22,11 @@ export default function Hero({ name }) {
       idx++;
       setTypedIdx(idx);
       if (idx < letters.length - 1) {
-        // Random delay between 100ms to 200ms
         const delay = Math.floor(Math.random() * 100) + 100;
         timeoutId = setTimeout(typeNext, delay);
+      } else {
+        // Fade in subheading and icons together after 0.2s
+        setTimeout(() => setShowInfo(true), 200);
       }
     }
 
@@ -72,6 +79,39 @@ export default function Hero({ name }) {
           <span style={cursorStyle} />
         </h1>
       </div>
+
+      {/* Subheader and Icons */}
+      {showInfo && (
+        <>
+          <motion.div
+            className="text-text text-2xl font-medium"
+            style={{ marginTop: "10px" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: showInfo ? 1 : 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {subheader}
+          </motion.div>
+
+          <motion.div
+            className="flex space-x-8"
+            style={{ marginTop: "10px" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: showInfo ? 1 : 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <a href="https://github.com/mikaelskjonhaug" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faGithub} size="2x" className="text-text hover:text-accent transition-colors" />
+            </a>
+            <a href="https://linkedin.com/in/mikaelskjonhaug" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faLinkedin} size="2x" className="text-text hover:text-accent transition-colors" />
+            </a>
+            <a href="mailto:mikaelsk@berkeley.edu">
+              <FontAwesomeIcon icon={faEnvelope} size="2x" className="text-text hover:text-accent transition-colors" />
+            </a>
+          </motion.div>
+        </>
+      )}
     </section>
   );
 }
