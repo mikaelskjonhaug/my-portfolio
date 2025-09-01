@@ -17,8 +17,8 @@ export default function Hero({ name }) {
       idx++;
       setTypedIdx(idx);
       if (idx < letters.length - 1) {
-        // Random delay between 60ms and 220ms
-        const delay = Math.floor(Math.random() * 160) + 60;
+        // Random delay between 100ms to 200ms
+        const delay = Math.floor(Math.random() * 100) + 100;
         timeoutId = setTimeout(typeNext, delay);
       }
     }
@@ -29,15 +29,16 @@ export default function Hero({ name }) {
 
   // Blinking cursor using CSS animation
   const cursorStyle = {
-    width: "0.6em",
-    height: "1em",
-    marginLeft: "2px",
-    verticalAlign: "bottom",
-    borderRadius: "2px",
+    width: "0.4em",
+    height: "0.8em",
+    marginLeft: "0px",
+    verticalAlign: "text_bottom",
+    borderRadius: "1px",
     background: "var(--tw-color-accent2, #00BFA6)",
     display: "inline-block",
     animation: "blink 1s steps(1) infinite",
-    opacity: 0.1
+    position: "relative",
+    top: "0.2em"
   };
 
   return (
@@ -52,8 +53,8 @@ export default function Hero({ name }) {
           }
         `}
       </style>
-      <div className="mt-[170px] flex justify-center items-center" style={{ height: "180px" }}>
-        <h1 className="text-5xl md:text-6xl font-bold flex justify-center" style={{ marginTop: "50px", transform: "scale(2)" }}>
+      <div className="mt-[10px] flex justify-center items-center" style={{ height: "180px" }}>
+        <h1 className="text-4xl md:text-4xl font-bold flex justify-center" style={{ marginTop: "50px", transform: "scale(2)" }}>
           {letters.slice(0, typedIdx + 1).map((char, i) => {
             let colorClass = primary;
             if (i === firstMIdx || i === firstSIdx) colorClass = accent;
@@ -61,7 +62,7 @@ export default function Hero({ name }) {
               <span
                 key={i}
                 className={colorClass}
-                style={{ margin: "0 2px", transition: "opacity 0.2s" }}
+                style={{ margin: "0 0px", transition: "opacity 0.2s" }}
               >
                 {char}
               </span>

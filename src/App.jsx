@@ -10,15 +10,15 @@ function Navbar() {
       <img
         src={msLogo}
         alt="Mikael Skjonhaug logo"
-        className="h-[80px] w-auto"
+        className="h-[60px] w-auto"
         style={{ objectFit: "contain" }}
       />
       {/* Nav links right */}
       <div className="flex space-x-8">
-        <a href="#about" className="text-lg font-semibold text-text hover:text-accent transition-colors">About</a>
-        <a href="#experience" className="text-lg font-semibold text-text hover:text-accent transition-colors">Experience</a>
-        <a href="#skills" className="text-lg font-semibold text-text hover:text-accent transition-colors">Skills</a>
-        <a href="#projects" className="text-lg font-semibold text-text hover:text-accent transition-colors">Projects</a>
+        <a href="#about" className="text-base font-semibold text-text hover:text-accent transition-colors">About</a>
+        <a href="#experience" className="text-base font-semibold text-text hover:text-accent transition-colors">Experience</a>
+        <a href="#skills" className="text-base font-semibold text-text hover:text-accent transition-colors">Skills</a>
+        <a href="#projects" className="text-base font-semibold text-text hover:text-accent transition-colors">Projects</a>
       </div>
     </nav>
   );
