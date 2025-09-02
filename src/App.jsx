@@ -77,7 +77,7 @@ export default function App() {
       <section id="experience"  className="scroll-mt-[200px] mt-[50px] md:mt-[125px]">
       <Experience/>
       </section>
-      <section id="projects"  className="scroll-mt-[200px] mt-[50px] md:mt-[125px]">
+      <section id="projects"  className="scroll-mt-[200px] mt-[50px] md:mt-[125px] mb-[50px]">
       <Projects/>
       </section>
       </div>
