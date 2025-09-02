@@ -50,7 +50,7 @@ export default function Hero({ name, subheader }) {
 
   return (
     <section
-      className="bg-bg min-h-[60vh]  mb-12 flex flex-col items-center text-center px-6 scale-50 md:scale-100 -mt-[100px] md:mt-0"
+      className="bg-bg mb-[100px] flex flex-col items-center text-center px-6 scale-50 md:scale-100 -mt-[100px] md:mt-0"
       style={{
         alignItems: "center",
         justifyContent: "flex-start",

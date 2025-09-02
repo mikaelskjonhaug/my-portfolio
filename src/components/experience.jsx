@@ -26,7 +26,7 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section className="py-8 min-h-[75vh]">
+    <section className="py-8">
       <style>{`
         .exp-card {
           transition: box-shadow 0.3s;
@@ -41,7 +41,7 @@ export default function Experience() {
       <div className="text-accent2 text-3xl font-bold mb-6 text-center" id="experience">
         Experience
       </div>
-      <div className="flex space-x-6 overflow-x-auto snap-x px-4 justify-center items-center w-full" style={{scrollbarWidth: 'thin', WebkitOverflowScrolling: 'touch'}}>
+  <div className="flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 px-4 justify-center items-center w-full">
         {experiences.map((exp, idx) => (
           <div
             key={idx}

@@ -7,6 +7,7 @@ import AboutMe from "./components/about-me.jsx";
 import { useState } from "react";
 import Experience from "./components/experience.jsx";
 import Projects from "./components/projects.jsx"
+import Skills from "./components/skills.jsx";
 
 function Navbar() {
   const [logoSrc, setLogoSrc] = useState(msLogoOrange);
@@ -70,6 +71,7 @@ export default function App() {
             />
           </div>
           <AboutMe/>
+          <Skills/>
           <Experience/>
           <Projects/>
         </div>

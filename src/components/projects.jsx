@@ -1,6 +1,6 @@
 import reactLogo from "../assets/react.svg"; // Placeholder logo
 
-const experiences = [
+const projects = [
   {
     logo: reactLogo,
     title: "SVG logo from text",
@@ -26,7 +26,7 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section className="py-8 min-h-[75vh]">
+    <section className="py-8">
       <style>{`
         .exp-card {
           transition: box-shadow 0.3s;
@@ -38,11 +38,11 @@ export default function Experience() {
             0 0 32px 8px rgba(255,111,0,0.2); /* orange glow */
         }
       `}</style>
-      <div className="text-accent2 text-3xl font-bold mb-6 text-center" id="experience">
+      <div className="text-accent2 text-3xl font-bold mb-6 text-center " id="experience">
         Projects
       </div>
-      <div className="flex space-x-6 overflow-x-auto snap-x px-4 justify-center items-center w-full" style={{scrollbarWidth: 'thin', WebkitOverflowScrolling: 'touch'}}>
-        {experiences.map((exp, idx) => (
+      <div className="flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 px-4 justify-center items-center w-full">
+        {projects.map((exp, idx) => (
           <div
             key={idx}
             className="exp-card min-w-[250px] max-w-[250px] h-[288px] snap-center bg-bg2 rounded-xl p-4 flex flex-col items-center border-2"
@@ -67,7 +67,7 @@ export default function Experience() {
               {exp.tools.map((tool, i) => (
                 <span
                   key={i}
-                  className="px-2 py-1 rounded-full bg-bg text-accent2 text-[10px] font-medium border border-accent2 shadow-sm"
+                  className="px-3 py-1 rounded-full bg-bg text-accent2 text-xs font-medium border border-accent2 shadow-sm"
                   style={{display: 'inline-block'}}
                 >
                   {tool}
