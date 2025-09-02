@@ -1,7 +1,7 @@
 import reactLogo from "../assets/react.svg"; // Placeholder logo
-import hortus_logo from "../assets/hortus-logo.webp"
+import hortus_logo from "../assets/Hortus-logo.webp"
 import gcc_logo from "../assets/GCC_logo.jpg"
-import washington_logo from "../assets/washington_logo.webp"
+import washington_logo from "../assets/Washington_logo.webp"
 
 const experiences = [
   {
