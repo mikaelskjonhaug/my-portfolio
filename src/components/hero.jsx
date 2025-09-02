@@ -50,7 +50,7 @@ export default function Hero({ name, subheader }) {
 
   return (
     <section
-      className="bg-bg mb-[100px] flex flex-col items-center text-center px-6 scale-50 md:scale-100 -mt-[100px] md:mt-0"
+      className="bg-bg flex flex-col items-center text-center px-6 scale-50 md:scale-100 md:mt-0"
       style={{
         alignItems: "center",
         justifyContent: "flex-start",
@@ -64,8 +64,8 @@ export default function Hero({ name, subheader }) {
           }
         `}
       </style>
-      <div className="mt-[10px] flex justify-center items-center" style={{ height: "180px" }}>
-        <h1 className="text-4xl md:text-4xl font-bold flex justify-center" style={{ marginTop: "50px", transform: "scale(2)" }}>
+      <div className=" flex justify-center items-center" >
+        <h1 className="text-4xl md:text-4xl font-bold flex justify-center" style={{ transform: "scale(2)" }}>
           {letters.slice(0, typedIdx + 1).map((char, i) => {
             let colorClass = primary;
             if (i === firstMIdx || i === firstSIdx) colorClass = accent;
@@ -89,8 +89,7 @@ export default function Hero({ name, subheader }) {
         <>
           {/* Subheading */}
           <motion.div
-            className="text-text text-2xl font-medium scale-100 md:scale-100"
-            style={{ marginTop: "10px" }}
+            className="text-text text-2xl mt-[25px] md:mt-[25px] font-medium scale-100 md:scale-100"
             initial={{ opacity: 0 }}
             animate={{ opacity: showInfo ? 1 : 0 }}
             transition={{ duration: 0.5 }}
@@ -100,8 +99,7 @@ export default function Hero({ name, subheader }) {
 
           {/* Icons */}
           <motion.div
-            className="flex space-x-8 scale-100 md:scale-100"
-            style={{ marginTop: "10px" }}
+            className="flex space-x-8 mt-[20px] md:mt-[20px] scale-125 md:scale-150"
             initial={{ opacity: 0 }}
             animate={{ opacity: showInfo ? 1 : 0 }}
             transition={{ duration: 0.5 }}

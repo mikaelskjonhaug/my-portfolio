@@ -1,22 +1,25 @@
 import reactLogo from "../assets/react.svg"; // Placeholder logo
+import snake_logo from "../assets/snake_logo.webp"
+import ms_logo from "../assets/ms-logo-orange.png"
+import twitter_logo from "../assets/twitter_logo.avif"
 
 const projects = [
   {
-    logo: reactLogo,
+    logo: ms_logo,
     title: "SVG logo from text",
     tools: ["Python", "Pillow"],
     overview: "Creates beautiful SVG renders with any font and text size desired",
     link: "https://github.com/mikaelskjonhaug/svg_font_logo"
   },
   {
-    logo: reactLogo,
+    logo: snake_logo,
     title: "Snake-AI",
     tools: ["Python", "StableBaseline3", "OpenAI-GYM"],
     overview: "Deep Q-Network RL agent that can learn to play Snake. Custom built engine and enviornment.",
     link: "https://github.com/mikaelskjonhaug/snake-ai"
   },
   {
-    logo: reactLogo,
+    logo: twitter_logo,
     title: "Full-stack Social Media",
     tools: ["Swift", "Firebase"],
     overview: "Social media app with full functionality",
@@ -26,7 +29,7 @@ const projects = [
 
 export default function Experience() {
   return (
-    <section className="py-8">
+    <section className="">
       <style>{`
         .exp-card {
           transition: box-shadow 0.3s;
@@ -38,14 +41,14 @@ export default function Experience() {
             0 0 32px 8px rgba(255,111,0,0.2); /* orange glow */
         }
       `}</style>
-      <div className="text-accent2 text-3xl font-bold mb-6 text-center " id="experience">
+      <div className="mb-[25px] text-accent2 text-3xl font-bold text-center " id="experience">
         Projects
       </div>
       <div className="flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 px-4 justify-center items-center w-full">
         {projects.map((exp, idx) => (
           <div
             key={idx}
-            className="exp-card min-w-[250px] max-w-[250px] h-[288px] snap-center bg-bg2 rounded-xl p-4 flex flex-col items-center border-2"
+            className="exp-card min-w-[250px] max-w-[250px] h-[260px] snap-center bg-bg2 rounded-xl p-4 flex flex-col items-center border-2"
             style={{
               borderImage: "linear-gradient(135deg, var(--tw-color-accent2, #00BFA6) 0%, var(--tw-color-accent, #FF6F00) 100%) 1",
               borderImageSlice: 1,
@@ -58,16 +61,16 @@ export default function Experience() {
             <img
               src={exp.logo}
               alt={exp.title + " logo"}
-              className="w-16 h-16 mb-3"
+              className="w-16 h-16"
             />
-            <div className="text-text text-base font-semibold mb-2 text-center">
+            <div className="text-text text-base font-semibold text-center">
               {exp.title}
             </div>
-            <div className="flex flex-wrap justify-center gap-2 mb-2">
+            <div className="flex flex-wrap justify-center">
               {exp.tools.map((tool, i) => (
                 <span
                   key={i}
-                  className="px-3 py-1 rounded-full bg-bg text-accent2 text-xs font-medium border border-accent2 shadow-sm"
+                  className="px-3 rounded-full bg-bg text-text text-xs font-medium border border-accent2 shadow-sm"
                   style={{display: 'inline-block'}}
                 >
                   {tool}

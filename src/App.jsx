@@ -48,7 +48,8 @@ function Navbar() {
           className="flex items-end space-x-8"
           style={{ position: "relative", top: "-5px" }}
         >
-          <a href="#about-me" className="text-base font-semibold text-text hover:text-accent transition-colors">About</a>
+          <a href="#about-meme" className="text-base font-semibold text-text hover:text-accent transition-colors">About</a>
+          <a href="#skills" className="text-base font-semibold text-text hover:text-accent transition-colors">Skills</a>
           <a href="#experience" className="text-base font-semibold text-text hover:text-accent transition-colors">Experience</a>
           <a href="#projects" className="text-base font-semibold text-text hover:text-accent transition-colors">Projects</a>
         </div>
@@ -59,23 +60,26 @@ function Navbar() {
 
 export default function App() {
   return (
-    <div className="bg-bg min-h-screen">
-      <Navbar />
-      <main className="pt-[120px]">
-        <div className="relative bg-bg min-h-screen">
-          <div className="container py-2">
-            {/* hero section */}
-            <Hero
-              name="Mikael Skjonhaug"
-              subheader="AI/ML • SWE • Backend"
-            />
-          </div>
-          <AboutMe/>
-          <Skills/>
-          <Experience/>
-          <Projects/>
-        </div>
-      </main>
-    </div>
+    <div className="bg-bg">
+      <Navbar/>
+      <div className="mt-[60px] md:mt-[150px]">
+      <Hero 
+        name="Mikael Skjonhaug"
+        subheader="AI/ML • SWE • WEBDEV"
+      />
+      </div>
+      <section id="about-meme" className="scroll-mt-[200px] mt-[25px] md:mt-[125px]">
+      <AboutMe/>
+      </section>
+      <section id="skills"  className="scroll-mt-[200px] mt-[50px] md:mt-[125px]">
+      <Skills/>
+      </section>
+      <section id="experience"  className="scroll-mt-[200px] mt-[50px] md:mt-[125px]">
+      <Experience/>
+      </section>
+      <section id="projects"  className="scroll-mt-[200px] mt-[50px] md:mt-[125px]">
+      <Projects/>
+      </section>
+      </div>
   );
 }

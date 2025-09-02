@@ -1,22 +1,25 @@
 import reactLogo from "../assets/react.svg"; // Placeholder logo
+import hortus_logo from "../assets/hortus-logo.webp"
+import gcc_logo from "../assets/GCC_logo.jpg"
+import washington_logo from "../assets/washington_logo.webp"
 
 const experiences = [
   {
-    logo: reactLogo,
+    logo: gcc_logo,
     title: "Math Tutor",
     company: "Glendale Community College",
     overview: "WIP.",
     link: "https://www.glendale.edu/"
   },
   {
-    logo: reactLogo,
+    logo: hortus_logo,
     title: "Software Engineer Intern",
     company: "Hortus AI",
     overview: "WIP.",
     link: "https://hortus.ai/"
   },
   {
-    logo: reactLogo,
+    logo: washington_logo,
     title: "Assistant Coach",
     company: "Washington Justic",
     overview: "WIP.",
@@ -38,14 +41,14 @@ export default function Experience() {
             0 0 32px 8px rgba(255,111,0,0.2); /* orange glow */
         }
       `}</style>
-      <div className="text-accent2 text-3xl font-bold mb-6 text-center" id="experience">
+      <div className="mb-[25px] text-accent2 text-3xl font-bold text-center" id="experience">
         Experience
       </div>
   <div className="flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 px-4 justify-center items-center w-full">
         {experiences.map((exp, idx) => (
           <div
             key={idx}
-            className="exp-card min-w-[250px] max-w-[250px] h-[288px] snap-center bg-bg2 rounded-xl p-4 flex flex-col items-center border-2"
+            className="exp-card min-w-[250px] max-w-[250px] h-[260px] snap-center bg-bg2 rounded-xl p-4 flex flex-col items-center border-2"
             style={{
               borderImage: "linear-gradient(135deg, var(--tw-color-accent2, #00BFA6) 0%, var(--tw-color-accent, #FF6F00) 100%) 1",
               borderImageSlice: 1,
@@ -58,12 +61,12 @@ export default function Experience() {
             <img
               src={exp.logo}
               alt={exp.company + " logo"}
-              className="w-16 h-16 mb-3"
+              className="w-16 h-16"
             />
-            <div className="text-text text-base font-semibold mb-0 text-center">
+            <div className="text-text text-base font-semibold text-center">
               {exp.title}
             </div>
-            <div className="text-text text-sm italic mb-1 text-center" style={{fontSize: '0.875rem', fontStyle: 'italic', fontWeight: 'normal'}}>
+            <div className="text-text text-sm italic text-center" style={{fontSize: '0.875rem', fontStyle: 'italic', fontWeight: 'normal'}}>
               {exp.company}
             </div>
             <div className="text-muted text-sm text-center">

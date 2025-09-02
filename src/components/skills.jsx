@@ -30,37 +30,38 @@ export default function Skills() {
   ];
 
   return (
-    <section className="max-w-3xl mx-auto mt-4 px-4 text-center md:text-left">
+    <section className="max-w-3xl mx-auto px-4 text-center md:text-left">
+    <h2 className="text-accent2 text-xl md:text-3xl font-bold text-center md:text-left">Skills</h2>
       <div className="space-y-0">
         <div>
-          <h3 className="text-accent text-xl font-semibold mb-0 text-center md:text-left scale-[0.75] md:scale-100">Languages</h3>
-          <ul className="flex flex-wrap justify-center md:justify-start gap-1 md:gap-3">
+          <h3 className="text-accent text-xl text-center md:text-left scale-[0.75] md:scale-100">Languages</h3>
+          <ul className="flex flex-wrap justify-center md:justify-start ">
             {languages.map((lang) => (
-              <li key={lang.name} className="flex items-center gap-0.5 mb-0 justify-center md:justify-start scale-[0.75] md:scale-100">
+              <li key={lang.name} className="flex items-center justify-center md:justify-start scale-[0.75] md:scale-100">
                 <span className="text-base">{lang.icon}</span>
-                <span className="text-text text-base">{lang.name}</span>
+                <span className="text-text text-base">{lang.name}&nbsp;</span>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h3 className="text-accent text-xl font-semibold mb-0 text-center md:text-left scale-[0.75] md:scale-100">Frameworks / Libraries</h3>
-          <ul className="flex flex-wrap justify-center md:justify-start gap-1 md:gap-3">
+          <h3 className="text-accent text-xl text-center md:text-left scale-[0.75] md:scale-100">Frameworks / Libraries</h3>
+          <ul className="flex flex-wrap justify-center md:justify-start">
             {frameworks.map((fw) => (
-              <li key={fw.name} className="flex items-center gap-0.5 mb-0 justify-center md:justify-start scale-[0.75] md:scale-100">
+              <li key={fw.name} className="flex items-center justify-center md:justify-start scale-[0.75] md:scale-100">
                 <span className="text-base" style={fw.name === "Express.js" ? { WebkitTextStroke: "1px white" } : {}}>{fw.icon}</span>
-                <span className="text-text text-base">{fw.name}</span>
+                <span className="text-text text-base">{fw.name}&nbsp;</span>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h3 className="text-accent text-xl font-semibold mb-0 text-center md:text-left scale-[0.75] md:scale-100">Tools &amp; Databases</h3>
-          <ul className="flex flex-wrap justify-center md:justify-start gap-1 md:gap-3">
+          <h3 className="text-accent text-xl text-center md:text-left scale-[0.75] md:scale-100">Tools &amp; Databases</h3>
+          <ul className="flex flex-wrap justify-center md:justify-start">
             {tools.map((tool) => (
-              <li key={tool.name} className="flex items-center gap-0.5 mb-0 justify-center md:justify-start scale-[0.75] md:scale-100">
+              <li key={tool.name} className="flex items-center justify-center md:justify-start scale-[0.75] md:scale-100">
                 <span className="text-base">{tool.icon}</span>
-                <span className="text-text text-base">{tool.name}</span>
+                <span className="text-text text-base">{tool.name}&nbsp;</span>
               </li>
             ))}
           </ul>
