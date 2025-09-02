@@ -29,7 +29,7 @@ export default function AboutMe() {
   ];
 
   return (
-    <section id="about-me" className="max-w-2xl mx-auto mt-4 px-4 text-left">
+    <section id="about-me" className="max-w-3xl min-h-[60vh] mx-auto mt-4 px-4 text-left">
       <h2 className="text-accent2 text-3xl font-bold mb-4 text-left">About me</h2>
       <p className="text-text text-lg mb-8">
         Hi everyone 👋 I am Mikael.<br />

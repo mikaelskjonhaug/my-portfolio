@@ -50,7 +50,7 @@ export default function Hero({ name, subheader }) {
 
   return (
     <section
-      className="bg-bg min-h-screen flex flex-col items-center text-center px-6 scale-50 md:scale-100 -mt-[200px] md:mt-0"
+      className="bg-bg min-h-[60vh]  mb-12 flex flex-col items-center text-center px-6 scale-50 md:scale-100 -mt-[100px] md:mt-0"
       style={{
         alignItems: "center",
         justifyContent: "flex-start",
@@ -118,15 +118,6 @@ export default function Hero({ name, subheader }) {
           </motion.div>
         </>
       )}
-
-      {/* Down Arrow Link */}
-      <a
-        href="#about-me"
-        className="block mx-auto mt-8 text-text hover:text-accent2 transition-colors animate-bounce"
-        style={{ fontSize: "2.5rem" }}
-      >
-        &#8595;
-      </a>
     </section>
   );
 }
