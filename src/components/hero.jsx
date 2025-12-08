@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const accent = "text-accent";      // orange
 const primary = "text-text";      // primary white
 
-export default function Hero({ name, subheader }) {
+export default function Hero({ name, subheader, onAnimationComplete }) {
   const letters = name.split("");
   const firstMIdx = letters.findIndex(l => l.toLowerCase() === "m");
   const firstSIdx = letters.findIndex(l => l.toLowerCase() === "s");
@@ -26,7 +26,10 @@ export default function Hero({ name, subheader }) {
         timeoutId = setTimeout(typeNext, delay);
       } else {
         // Fade in subheading and icons together after 0.2s
-        setTimeout(() => setShowInfo(true), 200);
+        setTimeout(() => {
+          setShowInfo(true);
+          if (onAnimationComplete) onAnimationComplete();
+        }, 200);
       }
     }
 
@@ -50,7 +53,7 @@ export default function Hero({ name, subheader }) {
 
   return (
     <section
-      className="bg-bg flex flex-col items-center text-center px-6 scale-50 md:scale-100 md:mt-0"
+      className="flex flex-col items-center text-center px-6 scale-50 md:scale-100 md:mt-0"
       style={{
         alignItems: "center",
         justifyContent: "flex-start",

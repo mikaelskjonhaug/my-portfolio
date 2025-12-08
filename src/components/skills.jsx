@@ -1,43 +1,39 @@
 import { FaReact, FaNodeJs, FaPython, FaJava, FaGitAlt, FaDatabase, FaDocker, FaCloud } from "react-icons/fa";
-import { SiJavascript, SiCplusplus, SiDjango, SiNumpy, SiFlask, SiPytorch, SiExpress, SiMongodb, SiPostgresql, SiFirebase } from "react-icons/si";
+import { SiJavascript, SiCplusplus, SiDjango, SiNumpy, SiFlask, SiPytorch, SiExpress, SiMongodb, SiPostgresql, SiFirebase, SiC, SiCaddy } from "react-icons/si";
 
 export default function Skills() {
   const languages = [
     { name: "Python", icon: <FaPython className="text-yellow-500" /> },
     { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
     { name: "C++", icon: <SiCplusplus className="text-blue-700" /> },
+    { name: "C", icon: <SiC className="text-red-500" /> },
     { name: "SQL", icon: <FaDatabase className="text-indigo-500" /> },
-    { name: "Java", icon: <FaJava className="text-red-500" /> },
   ];
 
   const frameworks = [
     { name: "Django", icon: <SiDjango className="text-green-700" /> },
     { name: "NumPy", icon: <SiNumpy className="text-blue-400" /> },
+    { name: "PyTorch", icon: <SiPytorch className="text-red-500" /> },
     { name: "Node.js", icon: <FaNodeJs className="text-green-500" /> },
     { name: "React", icon: <FaReact className="text-blue-400" /> },
-    { name: "Flask", icon: <SiFlask className="text-gray-700" /> },
-    { name: "PyTorch", icon: <SiPytorch className="text-red-500" /> },
-    { name: "Express.js", icon: <SiExpress className="text-black" /> },
   ];
 
   const tools = [
     { name: "MongoDB", icon: <SiMongodb className="text-green-700" /> },
     { name: "PostgreSQL", icon: <SiPostgresql className="text-blue-700" /> },
-    { name: "Docker", icon: <FaDocker className="text-blue-400" /> },
-    { name: "Firebase", icon: <SiFirebase className="text-yellow-500" /> },
     { name: "AWS", icon: <FaCloud className="text-orange-400" /> },
     { name: "Git", icon: <FaGitAlt className="text-orange-600" /> },
   ];
 
   return (
-    <section className="max-w-3xl mx-auto px-4 text-center md:text-left">
-    <h2 className="text-accent2 text-xl md:text-3xl font-bold text-center md:text-left">Skills</h2>
+    <section className="max-w-3xl mx-auto px-4 text-center">
+    <h2 className="text-accent2 text-xl md:text-3xl font-bold text-center">Skills</h2>
       <div className="space-y-0">
         <div>
-          <h3 className="text-accent text-xl text-center md:text-left scale-[0.75] md:scale-100">Languages</h3>
-          <ul className="flex flex-wrap justify-center md:justify-start ">
+          <h3 className="text-accent text-xl text-center scale-[0.75] md:scale-100">Languages</h3>
+          <ul className="flex flex-wrap justify-center">
             {languages.map((lang) => (
-              <li key={lang.name} className="flex items-center justify-center md:justify-start scale-[0.75] md:scale-100">
+              <li key={lang.name} className="flex items-center justify-center scale-[0.75] md:scale-100">
                 <span className="text-base">{lang.icon}</span>
                 <span className="text-text text-base">{lang.name}&nbsp;</span>
               </li>
@@ -45,10 +41,10 @@ export default function Skills() {
           </ul>
         </div>
         <div>
-          <h3 className="text-accent text-xl text-center md:text-left scale-[0.75] md:scale-100">Frameworks / Libraries</h3>
-          <ul className="flex flex-wrap justify-center md:justify-start">
+          <h3 className="text-accent text-xl text-center scale-[0.75] md:scale-100">Frameworks / Libraries</h3>
+          <ul className="flex flex-wrap justify-center">
             {frameworks.map((fw) => (
-              <li key={fw.name} className="flex items-center justify-center md:justify-start scale-[0.75] md:scale-100">
+              <li key={fw.name} className="flex items-center justify-center scale-[0.75] md:scale-100">
                 <span className="text-base" style={fw.name === "Express.js" ? { WebkitTextStroke: "1px white" } : {}}>{fw.icon}</span>
                 <span className="text-text text-base">{fw.name}&nbsp;</span>
               </li>
@@ -56,10 +52,10 @@ export default function Skills() {
           </ul>
         </div>
         <div>
-          <h3 className="text-accent text-xl text-center md:text-left scale-[0.75] md:scale-100">Tools &amp; Databases</h3>
-          <ul className="flex flex-wrap justify-center md:justify-start">
+          <h3 className="text-accent text-xl text-center scale-[0.75] md:scale-100">Tools &amp; Databases</h3>
+          <ul className="flex flex-wrap justify-center">
             {tools.map((tool) => (
-              <li key={tool.name} className="flex items-center justify-center md:justify-start scale-[0.75] md:scale-100">
+              <li key={tool.name} className="flex items-center justify-center scale-[0.75] md:scale-100">
                 <span className="text-base">{tool.icon}</span>
                 <span className="text-text text-base">{tool.name}&nbsp;</span>
               </li>

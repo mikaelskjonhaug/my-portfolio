@@ -5,9 +5,11 @@ import msLogoOrange from "./assets/ms-logo-orange.png";
 import msLogoTeal from "./assets/ms-logo-teal.png";
 import AboutMe from "./components/about-me.jsx";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Experience from "./components/experience.jsx";
 import Projects from "./components/projects.jsx"
 import Skills from "./components/skills.jsx";
+import FloatingParticles from "./components/FloatingParticles.jsx";
 
 function Navbar() {
   const [logoSrc, setLogoSrc] = useState(msLogoOrange);
@@ -59,15 +61,25 @@ function Navbar() {
 }
 
 export default function App() {
+  const [heroComplete, setHeroComplete] = useState(false);
+
   return (
-    <div className="bg-bg">
+    <div className="min-h-screen relative">
+      <FloatingParticles count={40} />
+      <div className="relative z-10">
       <Navbar/>
       <div className="mt-[60px] md:mt-[150px]">
       <Hero 
         name="Mikael Skjonhaug"
         subheader="AI/ML • SWE • WEBDEV"
+        onAnimationComplete={() => setHeroComplete(true)}
       />
       </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: heroComplete ? 1 : 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
       <section id="about-meme" className="scroll-mt-[200px] mt-[25px] md:mt-[125px]">
       <AboutMe/>
       </section>
@@ -80,6 +92,8 @@ export default function App() {
       <section id="projects"  className="scroll-mt-[200px] mt-[50px] md:mt-[125px] mb-[50px]">
       <Projects/>
       </section>
+      </motion.div>
+      </div>
       </div>
   );
 }
