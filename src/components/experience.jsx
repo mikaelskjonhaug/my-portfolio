@@ -46,13 +46,13 @@ export default function Experience() {
         {experiences.map((exp, idx) => (
           <div
             key={idx}
-            className="bg-bg2 rounded-xl p-4 border-2 transition-all duration-300"
+            className="p-[2px] transition-all duration-300"
             style={{
-              borderImage:
-                "linear-gradient(135deg, var(--tw-color-accent2, #00BFA6) 0%, var(--tw-color-accent, #FF6F00) 100%) 1",
-              borderImageSlice: 1,
+              background: "linear-gradient(135deg, #00BFA6 0%, #FF6F00 100%)",
+              borderRadius: "12px",
             }}
           >
+            <div className="p-4" style={{ borderRadius: "10px", backgroundColor: "rgba(36, 36, 36, 0.8)" }}>
             <div className="flex items-center">
               {/* Logo */}
               <a
@@ -74,6 +74,9 @@ export default function Experience() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-text text-base font-semibold hover:text-accent2 transition-colors"
+                  style={{ transition: "color 0.2s, text-shadow 0.2s" }}
+                  onMouseEnter={(e) => e.target.style.textShadow = "0 0 10px #00BFA6, 0 0 20px #00BFA6"}
+                  onMouseLeave={(e) => e.target.style.textShadow = "none"}
                 >
                   {exp.company}
                 </a>
@@ -111,6 +114,7 @@ export default function Experience() {
                 </motion.div>
               )}
             </AnimatePresence>
+            </div>
           </div>
         ))}
       </div>
