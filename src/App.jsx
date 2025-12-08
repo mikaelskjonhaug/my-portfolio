@@ -73,7 +73,7 @@ export default function App() {
       <div className="mt-[60px] md:mt-[150px]">
       <Hero 
         name="Mikael Skjonhaug"
-        subheader="AI/ML • SWE • WEBDEV"
+        subheader="SWE • WEBDEV • AI/ML"
         onAnimationComplete={() => setHeroComplete(true)}
       />
       </div>
