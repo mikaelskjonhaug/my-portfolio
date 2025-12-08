@@ -64,7 +64,7 @@ export default function Experience() {
                 <img
                   src={exp.logo}
                   alt={exp.company + " logo"}
-                  className="w-14 h-14 rounded-md object-contain"
+                  className="w-14 h-14 rounded-lg object-cover"
                 />
               </a>
               {/* Company & Title */}

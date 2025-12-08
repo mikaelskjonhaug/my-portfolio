@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import snake_logo from "../assets/snake_logo.webp";
+import snake_logo from "../assets/snakelogo.jpg";
 import ms_logo from "../assets/ms-logo-orange.png";
 import twitter_logo from "../assets/twitter_logo.avif";
+import ios_logo from "../assets/ioslogo.png";
+import dungeon_logo from "../assets/dungeonart.jpg";
 
 const projects = [
   {
@@ -16,7 +18,7 @@ const projects = [
     link: "https://github.com/mikaelskjonhaug/snake-ai",
   },
   {
-    logo: twitter_logo,
+    logo: ios_logo,
     title: "iOS Social Network",
     tools: ["Swift", "Firebase"],
     overview: [
@@ -25,7 +27,7 @@ const projects = [
     link: "https://github.com/mikaelskjonhaug/social-media",
   },
     {
-    logo: ms_logo,
+    logo: dungeon_logo,
     title: "Procedurally generated roguelike",
     tools: ["Java"],
     overview: [
@@ -72,7 +74,7 @@ export default function Projects() {
                 <img
                   src={project.logo}
                   alt={project.title + " logo"}
-                  className="w-14 h-14 rounded-md object-contain"
+                  className="w-14 h-14 rounded-lg object-cover"
                 />
               </a>
               {/* Title & Tools */}

@@ -10,6 +10,7 @@ import Experience from "./components/experience.jsx";
 import Projects from "./components/projects.jsx"
 import Skills from "./components/skills.jsx";
 import FloatingParticles from "./components/FloatingParticles.jsx";
+import SnakeAnimation from "./components/SnakeAnimation.jsx";
 
 function Navbar() {
   const [logoSrc, setLogoSrc] = useState(msLogoOrange);
@@ -66,6 +67,7 @@ export default function App() {
   return (
     <div className="min-h-screen relative">
       <FloatingParticles count={40} />
+      <SnakeAnimation />
       <div className="relative z-10">
       <Navbar/>
       <div className="mt-[60px] md:mt-[150px]">
