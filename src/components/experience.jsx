@@ -6,14 +6,17 @@ import washington_logo from "../assets/Washington_logo.webp";
 const experiences = [
   {
     logo: hortus_logo,
-    title: "Software Engineer Intern",
+    title: "Lead Software Engineer Intern",
     company: "Hortus AI",
     overview: [
+      "Lead a team to eliminate significant technical debt by refactoring a 60,000+ line monolithic codebase into a scalable, modular architecture, reducing code complexity and deployment bottlenecks.",
+      "Engineered a comprehensive testing infrastructure for unit, integration and e2e tests using Pytest and Cypress.",
       "Engineered a dual dyno Heroku architecture to decouple the Frontend and Backend, resolving critical deployment blockers. Took ownership of the full CI/CD pipeline and managed code quality by reviewing all team pull requests.",
       "Built data ingestion pipelines using Gemini and Hugging Face APIs to scrape and enrich vendor data, scaling the marketplace inventory by 600% across fact sheets and service offerings.",
       "Designed an automated assessment framework using Gemini to score AI vendors on privacy, security, and usability. Enabled users to perform side-by-side fact sheet comparisons and identify tool synergies.",
       "Integrated Stripe payment infrastructure to replace manual billing, enabling automatic subscription management and secure access control for scalable revenue collection.",
     ],
+    duration: "August 2025 - Present",
     link: "https://hortus.ai/",
   },
   {
@@ -23,6 +26,7 @@ const experiences = [
     overview: [
       "Helped improve team global ranking from 18th to 4th after assistant coach assignment by organizing structured pre-game strategy meetings and weekly one-on-one performance reviews for athletes",
     ],
+    duration: "Aug 2018 - Dec 2019",
     link: "https://www.washington-justice.com/",
   },
 ];
@@ -73,14 +77,13 @@ export default function Experience() {
                   href={exp.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-text text-base font-semibold hover:text-accent2 transition-colors"
+                  className="text-text text-base font-semibold hover:text-accent transition-colors"
                   style={{ transition: "color 0.2s, text-shadow 0.2s" }}
-                  onMouseEnter={(e) => e.target.style.textShadow = "0 0 10px #00BFA6, 0 0 20px #00BFA6"}
-                  onMouseLeave={(e) => e.target.style.textShadow = "none"}
                 >
                   {exp.company}
                 </a>
                 <div className="text-muted text-sm">{exp.title}</div>
+                <div className="text-accent2 text-sm">{exp.duration}</div>
               </div>
               {/* Read More Button */}
               <button

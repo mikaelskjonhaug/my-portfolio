@@ -5,8 +5,19 @@ import ms_logo from "../assets/ms-logo-orange.png";
 import twitter_logo from "../assets/twitter_logo.avif";
 import ios_logo from "../assets/ioslogo.png";
 import dungeon_logo from "../assets/dungeonart.jpg";
+import { Baby } from 'lucide-react';
 
 const projects = [
+  {
+    logo: Baby,
+    title: "Beebo - SaaS",
+    tools: ["Python", "FastAPI", "React", "PostgreSQL"],
+    overview: [
+      "Built a scalable full‑stack SaaS with a FastAPI backend and a Next.js (React) frontend, persisting data in PostgreSQL via SQLAlchemy models. ",
+      "Implemented end-to-end security protocols, including ephemeral tokens, secure cookie flags, and CORS, with at-rest encryption for sensitive user information.",
+    ],
+    link: "https://beebo.baby",
+  },
   {
     logo: snake_logo,
     title: "Snake-AI",
@@ -16,15 +27,6 @@ const projects = [
       "Implemented and trained a DQN agent with Stable-Baselines3 that converged in <100K time steps (20 apples/episode on a 12×12 board)",
     ],
     link: "https://github.com/mikaelskjonhaug/snake-ai",
-  },
-  {
-    logo: ios_logo,
-    title: "iOS Social Network",
-    tools: ["Swift", "Firebase"],
-    overview: [
-      "Built a high-performance SwiftUI front end with declarative, state-driven views integrated with a secure Firebase backend (Auth + Firestore real-time listeners), enabling fluid 60 FPS feed scrolling, instant UI updates, and scalable data models for posts, likes, comments, and follows."
-    ],
-    link: "https://github.com/mikaelskjonhaug/social-media",
   },
     {
     logo: dungeon_logo,
@@ -52,6 +54,9 @@ export default function Projects() {
       >
         Projects
       </div>
+      <p className="text-center text-muted mb-8 max-w-2xl mx-auto px-4">
+        A selection of personal and academic projects showcasing my skills in software development, machine learning, and game design.
+      </p>
       <div className="flex flex-col space-y-4 px-4 max-w-2xl mx-auto">
         {projects.map((project, idx) => (
           <div
@@ -71,11 +76,19 @@ export default function Projects() {
                 rel="noopener noreferrer"
                 className="flex-shrink-0"
               >
-                <img
-                  src={project.logo}
-                  alt={project.title + " logo"}
-                  className="w-14 h-14 rounded-lg object-cover"
-                />
+
+                    {(() => {
+                  const Logo = project.logo;
+                  return typeof Logo === "string" ? (
+                    <img
+                      src={Logo}
+                      alt={project.title + " logo"}
+                      className="w-14 h-14 rounded-lg object-cover"
+                    />
+                  ) : (
+                    <Logo className="w-14 h-14 rounded-lg object-cover" />
+                  );
+                })()}
               </a>
               {/* Title & Tools */}
               <div className="ml-4 flex-1 min-w-0">
@@ -83,10 +96,8 @@ export default function Projects() {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-text text-base font-semibold hover:text-accent2 transition-colors"
+                  className="text-text text-base font-semibold hover:text-accent transition-colors"
                   style={{ transition: "color 0.2s, text-shadow 0.2s" }}
-                  onMouseEnter={(e) => e.target.style.textShadow = "0 0 10px #00BFA6, 0 0 20px #00BFA6"}
-                  onMouseLeave={(e) => e.target.style.textShadow = "none"}
                 >
                   {project.title}
                 </a>
@@ -94,7 +105,7 @@ export default function Projects() {
                   {project.tools.map((tool, i) => (
                     <span
                       key={i}
-                      className="px-2 py-0.5 rounded-full bg-bg text-muted text-xs font-medium border border-accent2/50"
+                      className="px-2 py-0.5 rounded-full bg-bg text-accent2 text-xs font-medium border border-accent2/50"
                     >
                       {tool}
                     </span>
@@ -119,7 +130,7 @@ export default function Projects() {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="overflow-hidden"
                 >
-                  <div className="mt-3 pt-3 border-t border-muted/30 text-muted text-sm">
+                  <div className="mt-3 pt-3 border-t border-muted/30 text-text text-sm">
                     {Array.isArray(project.overview) ? (
                       <ul className="list-disc list-inside space-y-2">
                         {project.overview.map((item, i) => (

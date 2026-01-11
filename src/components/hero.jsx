@@ -13,28 +13,52 @@ export default function Hero({ name, subheader, onAnimationComplete }) {
   const firstSIdx = letters.findIndex(l => l.toLowerCase() === "s");
   const [typedIdx, setTypedIdx] = useState(-1);
   const [showInfo, setShowInfo] = useState(false);
+  const [extraSuffix, setExtraSuffix] = useState("");
 
   useEffect(() => {
     let idx = -1;
-    let timeoutId;
+    const timeouts = [];
 
     function typeNext() {
       idx++;
       setTypedIdx(idx);
       if (idx < letters.length - 1) {
-        const delay = Math.floor(Math.random() * 100) + 100;
-        timeoutId = setTimeout(typeNext, delay);
+        const delay = Math.floor(Math.random() * 200) + 100;
+        timeouts.push(setTimeout(typeNext, delay));
       } else {
-        // Fade in subheading and icons together after 0.2s
-        setTimeout(() => {
-          setShowInfo(true);
-          if (onAnimationComplete) onAnimationComplete();
-        }, 200);
+        // After fully typed, perform: backspace twice, type ".ug", then show info
+        let t = 500; // initial pause after full typing
+
+        // backspace twice
+        timeouts.push(
+          setTimeout(() => setTypedIdx((prev) => Math.max(prev - 1, -1)), t)
+        );
+        t += 150;
+        timeouts.push(
+          setTimeout(() => setTypedIdx((prev) => Math.max(prev - 1, -1)), t)
+        );
+
+        // ensure extraSuffix starts empty, then type '.', 'u', 'g'
+        t += Math.floor(Math.random() * 200) + 100;
+        timeouts.push(setTimeout(() => setExtraSuffix("."), t));
+        t += Math.floor(Math.random() * 200) + 100;
+        timeouts.push(setTimeout(() => setExtraSuffix(".u"), t));
+        t += Math.floor(Math.random() * 200) + 100;
+        timeouts.push(setTimeout(() => setExtraSuffix(".ug"), t));
+
+        // final pause then show subheader/icons
+        t += 240;
+        timeouts.push(
+          setTimeout(() => {
+            setShowInfo(true);
+            if (onAnimationComplete) onAnimationComplete();
+          }, t)
+        );
       }
     }
 
     typeNext();
-    return () => clearTimeout(timeoutId);
+    return () => timeouts.forEach((id) => clearTimeout(id));
   }, [letters.length]);
 
   // Blinking cursor using CSS animation
@@ -82,6 +106,7 @@ export default function Hero({ name, subheader, onAnimationComplete }) {
               </span>
             );
           })}
+          <span className={primary} style={{ margin: "0 0px", transition: "opacity 0.2s" }}>{extraSuffix}</span>
           {/* Cursor appears after the last typed letter */}
           <span style={cursorStyle} />
         </h1>
@@ -92,7 +117,7 @@ export default function Hero({ name, subheader, onAnimationComplete }) {
         <>
           {/* Subheading */}
           <motion.div
-            className="text-text text-2xl mt-[25px] md:mt-[25px] font-medium scale-100 md:scale-100"
+            className="text-text text-2xl mt-[50px] md:mt-[50px] font-medium scale-100 md:scale-100"
             initial={{ opacity: 0 }}
             animate={{ opacity: showInfo ? 1 : 0 }}
             transition={{ duration: 0.5 }}
@@ -102,7 +127,7 @@ export default function Hero({ name, subheader, onAnimationComplete }) {
 
           {/* Icons */}
           <motion.div
-            className="flex space-x-8 mt-[20px] md:mt-[20px] scale-125 md:scale-150"
+            className="flex space-x-8 mt-[40px] md:mt-[40px] scale-125 md:scale-150"
             initial={{ opacity: 0 }}
             animate={{ opacity: showInfo ? 1 : 0 }}
             transition={{ duration: 0.5 }}
