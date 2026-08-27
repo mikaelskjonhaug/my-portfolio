@@ -272,7 +272,7 @@ button:focus-visible {
   font-size: 0.85rem;
 }
 
-.command-links a:focus {
+.command-links a:is(:focus, :hover) {
   background: var(--rule);
   color: var(--cyan);
   outline-offset: -2px;
@@ -296,7 +296,7 @@ button:focus-visible {
   opacity: 0;
 }
 
-.command-links a:focus > span:last-child {
+.command-links a:is(:focus, :hover) > span:last-child {
   opacity: 1;
 }
 
@@ -546,6 +546,41 @@ button:focus-visible {
   padding: 0 2rem 1.5rem 3.75rem;
   color: var(--muted);
   font-size: 0.88rem;
+}
+
+/* ponytail: interpolate-size gives details a real open/close transition;
+   Safari <18.4 ignores it and just pops, which is the old behavior. */
+:root {
+  interpolate-size: allow-keywords;
+}
+
+.project-entry::details-content {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: height 260ms ease, opacity 200ms ease, content-visibility 260ms allow-discrete;
+  transition-behavior: allow-discrete;
+}
+
+.project-entry[open]::details-content {
+  height: auto;
+  opacity: 1;
+}
+
+.project-entry .entry-details {
+  transform: translateY(-0.35rem);
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-entry[open] .entry-details {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-entry::details-content,
+  .project-entry .entry-details {
+    transition: none;
+  }
 }
 
 .entry-details ul {

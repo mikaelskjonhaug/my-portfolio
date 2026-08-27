@@ -31,6 +31,7 @@ export default function CommandMenu({ links, socialLinks }) {
   const inputRef = useRef(null);
   const resultsRef = useRef(null);
   const [query, setQuery] = useState("");
+  const [hovered, setHovered] = useState(null);
   const navigationItems = [
     { label: "Hero", href: "#top", shortcut: 0 },
     ...links.map((label, index) => ({
@@ -81,13 +82,15 @@ export default function CommandMenu({ links, socialLinks }) {
       window.requestAnimationFrame(() => inputRef.current?.focus());
     }
   };
-  const focusOnHover = (event) => event.currentTarget.focus();
-  const openFirstResult = (event) => {
+  const openActiveResult = (event) => {
     if (event.key === "Enter") {
-      const firstResult = resultsRef.current?.querySelector("a");
-      if (firstResult) {
+      // ponytail: hovered link wins, else first result
+      const target = hovered
+        ? resultsRef.current?.querySelector(`a[href="${CSS.escape(hovered)}"]`)
+        : resultsRef.current?.querySelector("a");
+      if (target) {
         event.preventDefault();
-        firstResult.click();
+        target.click();
       }
     }
   };
@@ -112,8 +115,11 @@ export default function CommandMenu({ links, socialLinks }) {
               ref={inputRef}
               type="search"
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              onKeyDown={openFirstResult}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                setHovered(null);
+              }}
+              onKeyDown={openActiveResult}
               placeholder="Search commands"
               aria-label="Search commands"
             />
@@ -124,7 +130,13 @@ export default function CommandMenu({ links, socialLinks }) {
         </header>
         <nav ref={resultsRef} className="command-links" aria-label="Command navigation">
           {navigationResults.map(({ label, href, shortcut }) => (
-            <a key={label} href={href} onClick={close} onMouseEnter={focusOnHover}>
+            <a
+              key={label}
+              href={href}
+              onClick={close}
+              onMouseEnter={() => setHovered(href)}
+              onMouseLeave={() => setHovered(null)}
+            >
               <kbd>{shortcut}</kbd>
               <span>{label}</span>
               <span aria-hidden="true">↵</span>
@@ -140,7 +152,8 @@ export default function CommandMenu({ links, socialLinks }) {
               target={href.startsWith("http") ? "_blank" : undefined}
               rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
               onClick={close}
-              onMouseEnter={focusOnHover}
+              onMouseEnter={() => setHovered(href)}
+              onMouseLeave={() => setHovered(null)}
             >
               <span className="command-social-mark" aria-hidden="true">↗</span>
               <span>{label}</span>

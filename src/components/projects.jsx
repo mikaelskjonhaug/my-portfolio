@@ -1,6 +1,8 @@
 import { Baby } from "lucide-react";
 import dungeonLogo from "../assets/dungeonart.jpg";
 import snakeLogo from "../assets/snakelogo.jpg";
+import riscvCpu from "../assets/RISCVcpu.jpg";
+import qwenLogo from "../assets/qwen_logo.png";
 
 const projects = [
   {
@@ -9,19 +11,33 @@ const projects = [
     type: "SaaS",
     tools: ["Python", "FastAPI", "React", "PostgreSQL"],
     overview: [
-      "Built a full-stack SaaS with a FastAPI backend, React frontend, and PostgreSQL persistence.",
-      "Implemented ephemeral tokens, secure cookies, CORS protections, and encryption for sensitive information.",
+      "WIP — a SaaS platform for parents to track and analyze their baby's growth, health, and development.",
     ],
-    link: "https://beebo.baby",
+    link: "https://github.com/mikaelskjonhaug/Beebo",
   },
+  {
+    logo: riscvCpu,
+    title: "RISCV CPU",
+    type: "Computer Architecture",
+    tools: ["Logism", "Java"],
+    overview: [
+      "2 stage pipelined CPU with hazard detection, branch prediction, and a custom instruction set.",
+    ],
+  },
+  {
+    logo: qwenLogo,
+    title: "LLM Fine-tuning",
+    type: "Model training",
+    tools: ["Python", "PyTorch", "Transformers"],
+    overview: ["Full fine-tune of Qwen2.5-0.5B-Instruct on ML exam multiple-choice questions, improving accuracy 2x while preserving general reasoning."],
+  },  
   {
     logo: snakeLogo,
     title: "Snake AI",
     type: "Reinforcement learning",
     tools: ["Python", "NumPy", "Pygame", "OpenAI Gym"],
     overview: [
-      "Built a custom Snake environment with modular rewards and real-time rendering at up to 1,500 FPS.",
-      "Trained a DQN agent that converged in fewer than 100,000 time steps.",
+      "Trained DQN agent in custom OpenAI Gym Snake enviornment to achive high scores.",
     ],
     link: "https://github.com/mikaelskjonhaug/snake-ai",
   },
@@ -33,7 +49,6 @@ const projects = [
     overview: [
       "Built a seed-driven 2D roguelike with procedural worlds, turn-based combat, and custom save-state serialization.",
     ],
-    link: "https://github.com/mikaelskjonhaug/",
   },
 ];
 
@@ -48,7 +63,7 @@ export default function Projects() {
         {projects.map((project) => {
           const Logo = project.logo;
           return (
-            <details className="entry project-entry" key={project.title}>
+            <details className="entry project-entry" name="project" key={project.title}>
               <summary>
                 {typeof Logo === "string"
                   ? <img src={Logo} alt="" />
@@ -64,9 +79,11 @@ export default function Projects() {
                 <ul>
                   {project.overview.map((item) => <li key={item}>{item}</li>)}
                 </ul>
-                <a href={project.link} target="_blank" rel="noopener noreferrer">
-                  View project ↗
-                </a>
+                {project.link && (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer">
+                    View project ↗
+                  </a>
+                )}
               </div>
             </details>
           );
