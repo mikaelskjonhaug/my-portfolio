@@ -1,8 +1,9 @@
 const groups = [
-  ["languages", ["Python", "JavaScript", "C"]],
-  ["frameworks", ["Django", "FastAPI", "Node.js", "React"]],
-  ["databases", ["PostgreSQL", "MongoDB"]],
-  ["cloud", ["AWS", "Google Cloud"]]
+  ["languages", ["Python", "JavaScript", "C++", "Java", "C"]],
+  ["frameworks", ["Django", "FastAPI", "Node.js", "React", "PyTorch"]],
+  ["databases", ["PostgreSQL", "MongoDB", "SQLite"]],
+  ["cloud", ["AWS", "Google Cloud"]],
+  ["tools", ["Git", "GitHub Actions", "SSH", "Jupyter Notebook"]],
 ];
 
 export default function Skills() {
