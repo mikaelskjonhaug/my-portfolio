@@ -29,7 +29,7 @@ export default function App() {
       <div className="site-shell">
         <Navbar />
         <main className="site-main">
-          <Hero name="Mikael Skjonhaug" subheader="SWE · WEBDEV · AI/ML" />
+          <Hero name="mikaelskjonhaug" />
           <section id="about" className="portfolio-section">
             <AboutMe />
           </section>

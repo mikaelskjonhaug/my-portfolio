@@ -4,7 +4,7 @@ import washingtonLogo from "../assets/Washington_logo.webp";
 const experiences = [
   {
     logo: hortusLogo,
-    title: "Lead Software Engineer Intern",
+    title: "Software Engineer",
     company: "Hortus AI",
     overview: [
       "Led the modularization of a 60,000+ line codebase, reducing complexity and deployment bottlenecks.",
