@@ -431,6 +431,76 @@ button:focus-visible {
   color: var(--muted);
 }
 
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+/* ponytail: header row and each summary share one grid template so columns align
+   without a real table layout — a <details> can't span <td>s. */
+.blog-table thead tr,
+.blog-post summary {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) 7rem;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.blog-table th,
+.blog-table td {
+  border-bottom: 1px solid var(--rule);
+  padding: 0;
+}
+
+.blog-table th {
+  padding: 0.6rem 0;
+  color: var(--purple);
+  font-weight: 500;
+}
+
+.blog-post summary {
+  padding: 0.6rem 0;
+  color: var(--muted);
+  cursor: pointer;
+  list-style: none;
+  transition: color 160ms ease;
+}
+
+.blog-post summary::-webkit-details-marker {
+  display: none;
+}
+
+.blog-post summary:hover .blog-cell-title,
+.blog-post[open] .blog-cell-title {
+  color: var(--cyan);
+}
+
+.blog-cell-title {
+  color: var(--text);
+  transition: color 160ms ease;
+}
+
+.blog-cell-title::before {
+  display: inline-block;
+  width: 1rem;
+  color: var(--purple);
+  content: "+";
+}
+
+.blog-post[open] .blog-cell-title::before {
+  content: "−";
+}
+
+.blog-body {
+  margin: 0;
+  padding: 0 7rem 1.1rem 4rem;
+  color: var(--muted);
+  white-space: pre-wrap;
+}
+
 .skill-plaintext {
   margin: 0;
   color: var(--muted);
@@ -465,35 +535,66 @@ button:focus-visible {
   border-bottom: 1px solid var(--rule);
 }
 
-/* Each entry is a JSON object: brace, indented body, brace — one per line. */
-.entry summary {
+/* Each entry is a JSON object: brace, indented body, brace — one per line.
+   The entry is a flex column and summary "display: contents" so the closing
+   brace (a summary child, to survive collapse) can be ordered last. */
+.json-entry {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 1.1rem 0 0;
+  flex-direction: column;
+}
+
+.entry summary {
+  display: contents;
   cursor: pointer;
   list-style: none;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.8rem;
 }
 
-/* Closed: brace, head and closing brace sit on one line.
-   Open: the head drops to its own indented line. */
-.entry[open] summary {
-  display: block;
+/* Braces sit on the same rhythm as the field rows: identical line-height
+   and vertical padding, so every line in the object is evenly spaced. */
+.json-entry > summary > .json-brace {
+  padding: 0.2rem 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.8rem;
+  line-height: 1.8;
 }
 
+.json-entry > summary > .json-brace:first-child {
+  padding-top: 1.1rem;
+}
+
+.json-brace-close {
+  order: 3;
+  padding-bottom: 1.1rem;
+}
+
+.entry-details {
+  order: 2;
+}
+
+/* Head is always its own indented row, matching .json-row exactly,
+   so it does not move horizontally when the entry opens. */
 .json-row-head {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0;
+  padding: 0.2rem 0 0.2rem 1.5rem;
+  line-height: 1.8;
 }
 
-.entry[open] .json-row-head {
-  display: flex;
-  padding: 0.35rem 0 0 1.5rem;
+/* Punctuation hugs the value it follows; keys get the space after the colon. */
+.json-row-head .json-punct {
+  margin-right: 0.45rem;
+}
+
+.json-row-head .json-key {
+  margin-left: 0.1rem;
+}
+
+.json-row-head .json-logo {
+  margin-right: 0.1rem;
 }
 
 .json-key {
@@ -517,35 +618,33 @@ button:focus-visible {
 .json-fold {
   color: var(--rule);
   letter-spacing: 0.1em;
+  transition: opacity 160ms ease;
 }
 
-.entry[open] .json-fold,
-.entry[open] .json-brace-inline {
+.entry[open] .json-fold {
+  opacity: 0;
+}
+
+/* Trailing comma after title only makes sense once fields follow it. */
+.entry:not([open]) .json-comma-head {
   display: none;
 }
 
-.json-brace-close {
-  display: none;
-  padding-bottom: 1.1rem;
-  color: var(--cyan);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.8rem;
-}
-
-.entry[open] .json-brace-close {
-  display: block;
-}
-
-.entry:not([open]) summary {
-  padding-bottom: 1.1rem;
-}
+/* Closing brace lives inside <summary> so it survives the collapse —
+   anything after </summary> is part of the hidden content. Spacing comes
+   from the .json-brace rule above, keeping every line on one rhythm. */
 
 .json-row {
   display: flex;
   align-items: baseline;
-  gap: 0.35rem;
+  gap: 0;
   padding: 0.2rem 0 0.2rem 1.5rem;
   line-height: 1.8;
+}
+
+/* Colon hugs its key; the space belongs after it, as in formatted JSON. */
+.json-row > .json-punct {
+  margin-right: 0.45rem;
 }
 
 /* Value wraps as a block so a long string indents under itself
@@ -587,7 +686,7 @@ button:focus-visible {
 }
 
 .entry-details {
-  padding: 0 1rem 0.6rem 0;
+  padding: 0 1rem 0 0;
   color: var(--muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.8rem;
@@ -599,11 +698,16 @@ button:focus-visible {
   interpolate-size: allow-keywords;
 }
 
+/* Height and content share one curve and duration so the box and the text
+   inside it move together; mismatched easings read as a stutter. */
 .entry::details-content {
   height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: height 260ms ease, opacity 200ms ease, content-visibility 260ms allow-discrete;
+  transition:
+    height 280ms cubic-bezier(0.33, 1, 0.68, 1),
+    opacity 180ms linear,
+    content-visibility 280ms allow-discrete;
   transition-behavior: allow-discrete;
 }
 
@@ -612,18 +716,8 @@ button:focus-visible {
   opacity: 1;
 }
 
-.entry .entry-details {
-  transform: translateY(-0.35rem);
-  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.entry[open] .entry-details {
-  transform: translateY(0);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .entry::details-content,
-  .entry .entry-details {
+  .entry::details-content {
     transition: none;
   }
 }

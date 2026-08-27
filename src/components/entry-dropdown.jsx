@@ -33,10 +33,12 @@ export default function EntryDropdown({ logo, title, type, typeKey = "type", too
           <span className="json-key">title</span>
           <span className="json-punct">:</span>
           <span className="json-string" title={`${slug}.title`}>"{title}"</span>
-          <span className="json-punct">,</span>
+          <span className="json-punct json-comma-head">,</span>
           <span className="json-fold" aria-hidden="true">…</span>
         </span>
-        <span className="json-brace json-brace-inline">{"}"}</span>
+        {/* Inside <summary> so it stays visible when collapsed; flex order
+            below puts it under the expanded fields. */}
+        <span className="json-brace json-brace-close" aria-hidden="true">{"}"}</span>
       </summary>
 
       <div className="entry-details">
@@ -73,8 +75,6 @@ export default function EntryDropdown({ logo, title, type, typeKey = "type", too
           </Row>
         )}
       </div>
-
-      <div className="json-brace json-brace-close" aria-hidden="true">{"}"}</div>
     </details>
   );
 }

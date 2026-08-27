@@ -4,6 +4,7 @@ import Experience from "./components/experience.jsx";
 import Hero from "./components/hero.jsx";
 import Projects from "./components/projects.jsx";
 import Skills from "./components/skills.jsx";
+import { posts } from "./blog/index.js";
 
 const links = ["Blog", "Experience", "Projects", "Skills"];
 const socialLinks = [
@@ -42,10 +43,42 @@ export default function App() {
           <section id="blog" className="portfolio-section">
             <div className="section-layout">
               <header className="section-header">
-                <span>blog.md</span>
+                <span>blog.db</span>
                 <h2>Blog</h2>
               </header>
-              <p className="section-empty">No posts yet.</p>
+              <table className="blog-table">
+                <thead>
+                  <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">title</th>
+                    <th scope="col">date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {posts.length === 0 ? (
+                    <tr>
+                      <td className="section-empty" colSpan={3}>
+                        0 rows
+                      </td>
+                    </tr>
+                  ) : (
+                    posts.map((post) => (
+                      <tr key={post.id}>
+                        <td colSpan={3}>
+                          <details className="blog-post">
+                            <summary>
+                              <span className="blog-cell-id">{post.id}</span>
+                              <span className="blog-cell-title">{post.title}</span>
+                              <span className="blog-cell-date">{post.date}</span>
+                            </summary>
+                            <p className="blog-body">{post.body}</p>
+                          </details>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
             </div>
           </section>
           <section id="experience" className="portfolio-section">
