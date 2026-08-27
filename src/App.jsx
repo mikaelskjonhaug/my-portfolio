@@ -4,7 +4,6 @@ import Experience from "./components/experience.jsx";
 import Hero from "./components/hero.jsx";
 import Projects from "./components/projects.jsx";
 import Skills from "./components/skills.jsx";
-import SnakeAnimation from "./components/SnakeAnimation.jsx";
 
 const links = ["About", "Skills", "Experience", "Projects"];
 
@@ -27,7 +26,6 @@ function Navbar() {
 export default function App() {
   return (
     <div id="top">
-      <SnakeAnimation />
       <div className="site-shell">
         <Navbar />
         <main className="site-main">

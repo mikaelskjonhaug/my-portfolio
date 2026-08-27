@@ -29,5 +29,6 @@ test("portfolio content is visible before the hero animation completes", async (
   ]) {
     assert.match(html, new RegExp(marker));
   }
+  assert.match(html, /aria-label="mikaelskjonha\.ug"/);
   assert.doesNotMatch(html, /opacity:0/);
 });

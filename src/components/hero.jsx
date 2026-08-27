@@ -61,11 +61,6 @@ export default function Hero({ name, subheader }) {
           <span className="typing-caret" />
         </span>
       </h1>
-      <p className="hero-role">{subheader}</p>
-      <p className="hero-intro">
-        Software engineer building thoughtful AI products, dependable web systems,
-        and the occasional game.
-      </p>
       <div className="hero-links" aria-label="Social links">
         <a href="https://github.com/mikaelskjonhaug" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
           <FontAwesomeIcon icon={faGithub} />
