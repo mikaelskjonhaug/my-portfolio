@@ -9,7 +9,7 @@ export default function Skills() {
   return (
     <div className="section-layout">
       <header className="section-header">
-        <span>stack.json</span>
+        <span>skills.txt</span>
         <h2>Skills</h2>
       </header>
       <div className="skill-groups">

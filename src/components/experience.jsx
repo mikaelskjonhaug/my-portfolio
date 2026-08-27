@@ -1,3 +1,4 @@
+import EntryDropdown from "./entry-dropdown";
 import hortusLogo from "../assets/Hortus-logo.webp";
 import washingtonLogo from "../assets/Washington_logo.webp";
 
@@ -28,30 +29,22 @@ export default function Experience() {
   return (
     <div className="section-layout">
       <header className="section-header">
-        <span>work.log</span>
-        <h2>Experience</h2>
+        <span>work.json</span>
+        <h2>Work</h2>
       </header>
       <div className="entries">
         {experiences.map((experience) => (
-          <details className="entry" key={experience.company}>
-            <summary>
-              <img src={experience.logo} alt="" />
-              <span className="entry-title">
-                <strong>{experience.company}</strong>
-                <span>{experience.title}</span>
-              </span>
-              <time>{experience.duration}</time>
-              <span className="entry-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div className="entry-details">
-              <ul>
-                {experience.overview.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-              <a href={experience.link} target="_blank" rel="noopener noreferrer">
-                Visit {experience.company} ↗
-              </a>
-            </div>
-          </details>
+          <EntryDropdown
+            key={experience.company}
+            name="experience"
+            logo={experience.logo}
+            title={experience.company}
+            subtitle={experience.title}
+            meta={<time>{experience.duration}</time>}
+            overview={experience.overview}
+            link={experience.link}
+            linkLabel={`Visit ${experience.company}`}
+          />
         ))}
       </div>
     </div>

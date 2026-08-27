@@ -1,4 +1,5 @@
 import { Baby } from "lucide-react";
+import EntryDropdown from "./entry-dropdown";
 import dungeonLogo from "../assets/dungeonart.jpg";
 import snakeLogo from "../assets/snakelogo.jpg";
 import riscvCpu from "../assets/RISCVcpu.jpg";
@@ -17,7 +18,7 @@ const projects = [
   },
   {
     logo: riscvCpu,
-    title: "RISCV CPU",
+    title: "RISC-V CPU",
     type: "Computer Architecture",
     tools: ["Logism", "Java"],
     overview: [
@@ -56,38 +57,23 @@ export default function Projects() {
   return (
     <div className="section-layout">
       <header className="section-header">
-        <span>projects/</span>
-        <h2>Selected work</h2>
+        <span>projects.json</span>
+        <h2>Projects</h2>
       </header>
       <div className="entries">
-        {projects.map((project) => {
-          const Logo = project.logo;
-          return (
-            <details className="entry project-entry" name="project" key={project.title}>
-              <summary>
-                {typeof Logo === "string"
-                  ? <img src={Logo} alt="" />
-                  : <span className="project-icon"><Logo aria-hidden="true" /></span>}
-                <span className="entry-title">
-                  <strong>{project.title}</strong>
-                  <span>{project.type}</span>
-                </span>
-                <span className="project-tools">{project.tools.join(" · ")}</span>
-                <span className="entry-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div className="entry-details">
-                <ul>
-                  {project.overview.map((item) => <li key={item}>{item}</li>)}
-                </ul>
-                {project.link && (
-                  <a href={project.link} target="_blank" rel="noopener noreferrer">
-                    View project ↗
-                  </a>
-                )}
-              </div>
-            </details>
-          );
-        })}
+        {projects.map((project) => (
+          <EntryDropdown
+            key={project.title}
+            name="project"
+            logo={project.logo}
+            title={project.title}
+            subtitle={project.type}
+            meta={<span className="project-tools">{project.tools.join(" · ")}</span>}
+            overview={project.overview}
+            link={project.link}
+            linkLabel="View project"
+          />
+        ))}
       </div>
     </div>
   );

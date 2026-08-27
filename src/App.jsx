@@ -42,7 +42,7 @@ export default function App() {
           <section id="blog" className="portfolio-section">
             <div className="section-layout">
               <header className="section-header">
-                <span>blog/</span>
+                <span>blog.md</span>
                 <h2>Blog</h2>
               </header>
               <p className="section-empty">No posts yet.</p>

@@ -554,7 +554,7 @@ button:focus-visible {
   interpolate-size: allow-keywords;
 }
 
-.project-entry::details-content {
+.entry::details-content {
   height: 0;
   overflow: hidden;
   opacity: 0;
@@ -562,23 +562,23 @@ button:focus-visible {
   transition-behavior: allow-discrete;
 }
 
-.project-entry[open]::details-content {
+.entry[open]::details-content {
   height: auto;
   opacity: 1;
 }
 
-.project-entry .entry-details {
+.entry .entry-details {
   transform: translateY(-0.35rem);
   transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.project-entry[open] .entry-details {
+.entry[open] .entry-details {
   transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .project-entry::details-content,
-  .project-entry .entry-details {
+  .entry::details-content,
+  .entry .entry-details {
     transition: none;
   }
 }
