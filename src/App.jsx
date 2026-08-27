@@ -6,17 +6,25 @@ import Projects from "./components/projects.jsx";
 import Skills from "./components/skills.jsx";
 
 const links = ["Blog", "Skills", "Experience", "Projects"];
+const socialLinks = [
+  { label: "GitHub", href: "https://github.com/mikaelskjonhaug" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/mikaelskjonhaug" },
+  { label: "Email", href: "mailto:mikaelsk@berkeley.edu" },
+];
 
 function Navbar() {
+  const navLinks = ["Hero", ...links];
+
   return (
     <nav className="site-nav" aria-label="Primary navigation">
-      <a className="monogram" href="#top" aria-label="Back to top">
+      <span className="monogram" aria-label="ms.">
         <span>m</span>s<span>.</span>
-      </a>
+      </span>
       <div className="nav-links">
-        {links.map((label, index) => (
-          <a key={label} href={`#${label.toLowerCase()}`}>
-            <kbd>{index + 1}</kbd> {label}
+        {navLinks.map((label, index) => (
+          <a key={label} href={label === "Hero" ? "#top" : `#${label.toLowerCase()}`}>
+            <span>./ {label}</span>
+            <kbd>{index}</kbd>
           </a>
         ))}
       </div>
@@ -28,9 +36,9 @@ export default function App() {
     <div id="top">
       <div className="site-shell">
         <Navbar />
-        <CommandMenu links={links} />
+        <CommandMenu links={links} socialLinks={socialLinks} />
         <main className="site-main">
-          <Hero name="mikaelskjonhaug" />
+          <Hero name="mikaelskjonhaug" socialLinks={socialLinks} />
           <section id="blog" className="portfolio-section">
             <div className="section-layout">
               <header className="section-header">

@@ -103,17 +103,23 @@ button:focus-visible {
 }
 
 .nav-links a {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   transition: color 160ms ease, transform 160ms ease;
 }
 
 .nav-links kbd {
-  color: var(--rule);
+  min-width: 1.35rem;
+  padding: 0.05rem 0.3rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.25rem;
+  background: var(--surface);
+  color: var(--muted);
   font: inherit;
-}
-
-.nav-links a::before {
-  content: "./";
-  color: var(--rule);
+  text-align: center;
 }
 
 .nav-links a:hover {
@@ -187,6 +193,16 @@ button:focus-visible {
   padding: 0.4rem;
 }
 
+.command-group-label {
+  margin: 0.4rem 0.75rem 0.25rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .command-links a {
   display: grid;
   grid-template-columns: 1.75rem 1fr auto;
@@ -210,6 +226,11 @@ button:focus-visible {
   height: 1.65rem;
   place-items: center;
   font-size: 0.68rem;
+}
+
+.command-social-mark {
+  color: var(--purple);
+  text-align: center;
 }
 
 .command-links a > span:last-child {
@@ -539,18 +560,33 @@ button:focus-visible {
     backdrop-filter: blur(12px);
   }
 
-  .monogram {
-    margin: 0;
-  }
-
   .nav-links {
+    flex: 1;
     flex-direction: row;
-    gap: clamp(0.7rem, 4vw, 1.15rem);
-    font-size: 0.65rem;
+    justify-content: flex-start;
+    gap: 0.7rem;
+    overflow-x: auto;
+    font-size: 0.58rem;
+    scrollbar-width: none;
+    white-space: nowrap;
   }
 
-  .nav-links a::before {
-    content: none;
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .monogram {
+    flex: none;
+    margin: 0 0.8rem 0 0;
+  }
+
+  .nav-links a {
+    width: auto;
+    gap: 0;
+  }
+
+  .nav-links kbd {
+    display: none;
   }
 
   .nav-links a:hover {

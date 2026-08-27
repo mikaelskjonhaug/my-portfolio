@@ -49,11 +49,33 @@ test("keyboard shortcuts map to menu and numbered navigation actions", async (t)
 
   assert.equal(getNavigationAction(event("k", { metaKey: true }), 4), "menu");
   assert.equal(getNavigationAction(event("k", { ctrlKey: true }), 4), "menu");
+  assert.equal(getNavigationAction(event("0"), 4), "top");
   assert.equal(getNavigationAction(event("1"), 4), 0);
   assert.equal(getNavigationAction(event("4"), 4), 3);
   assert.equal(getNavigationAction(event("5"), 4), null);
+  assert.equal(getNavigationAction(event("Escape"), 4), "close");
   assert.equal(
     getNavigationAction(event("1", { target: { tagName: "INPUT" } }), 4),
     null,
   );
+});
+
+test("command menu includes hero and the existing social destinations", async (t) => {
+  const vite = await createServer({
+    appType: "custom",
+    server: { hmr: false, middlewareMode: true, ws: false },
+  });
+  t.after(() => vite.close());
+
+  const { default: App } = await vite.ssrLoadModule("/src/App.jsx");
+  const html = renderToStaticMarkup(createElement(App));
+
+  for (const href of [
+    "https://github.com/mikaelskjonhaug",
+    "https://linkedin.com/in/mikaelskjonhaug",
+    "mailto:mikaelsk@berkeley.edu",
+  ]) {
+    assert.equal(html.split(`href="${href}"`).length - 1, 2);
+  }
+  assert.equal(html.split('href="#top"').length - 1, 3);
 });

@@ -3,7 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
-export default function Hero({ name }) {
+const socialIcons = {
+  GitHub: faGithub,
+  LinkedIn: faLinkedin,
+  Email: faEnvelope,
+};
+
+export default function Hero({ name, socialLinks }) {
   const letters = name.split("");
   const finalName = `${name.slice(0, -2)}.ug`;
   const firstMIdx = letters.findIndex((letter) => letter.toLowerCase() === "m");
@@ -62,15 +68,17 @@ export default function Hero({ name }) {
         </span>
       </h1>
       <div className="hero-links" aria-label="Social links">
-        <a href="https://github.com/mikaelskjonhaug" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <FontAwesomeIcon icon={faGithub} />
-        </a>
-        <a href="https://linkedin.com/in/mikaelskjonhaug" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <FontAwesomeIcon icon={faLinkedin} />
-        </a>
-        <a href="mailto:mikaelsk@berkeley.edu" aria-label="Email Mikael">
-          <FontAwesomeIcon icon={faEnvelope} />
-        </a>
+        {socialLinks.map(({ label, href }) => (
+          <a
+            key={label}
+            href={href}
+            target={href.startsWith("http") ? "_blank" : undefined}
+            rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+            aria-label={label === "Email" ? "Email Mikael" : label}
+          >
+            <FontAwesomeIcon icon={socialIcons[label]} />
+          </a>
+        ))}
       </div>
     </header>
   );
