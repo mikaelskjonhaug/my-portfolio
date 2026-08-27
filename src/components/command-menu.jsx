@@ -98,7 +98,8 @@ export default function CommandMenu({ links, socialLinks }) {
   return (
     <>
       <button type="button" className="command-trigger" onClick={open}>
-        <span>command menu</span>
+        <span className="command-trigger-label">command menu</span>
+        <span className="command-trigger-label-mobile">click to open command menu</span>
         <kbd>{shortcut}</kbd>
       </button>
     <dialog

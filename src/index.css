@@ -151,6 +151,10 @@ button:focus-visible {
   transform: translateX(0.2rem);
 }
 
+.command-trigger-label-mobile {
+  display: none;
+}
+
 .command-trigger kbd {
   min-width: 2.75rem;
   padding: 0.05rem 0.3rem;
@@ -788,18 +792,8 @@ button:focus-visible {
     backdrop-filter: blur(12px);
   }
 
+  /* ponytail: whole bar is the command-menu button on mobile, so the section links go away */
   .nav-links {
-    flex: 1;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 0.7rem;
-    overflow-x: auto;
-    font-size: 0.58rem;
-    scrollbar-width: none;
-    white-space: nowrap;
-  }
-
-  .nav-links::-webkit-scrollbar {
     display: none;
   }
 
@@ -808,17 +802,29 @@ button:focus-visible {
     margin: 0 0.8rem 0 0;
   }
 
-  .nav-links a {
-    width: auto;
-    gap: 0;
+  .command-trigger {
+    margin: 0;
+    font-size: 0.7rem;
+    justify-content: center;
   }
 
-  .nav-links kbd {
+  .command-trigger::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+  }
+
+  .command-trigger:hover {
+    transform: none;
+  }
+
+  .command-trigger-label,
+  .command-trigger kbd {
     display: none;
   }
 
-  .nav-links a:hover {
-    transform: none;
+  .command-trigger-label-mobile {
+    display: inline;
   }
 
   .hero {
