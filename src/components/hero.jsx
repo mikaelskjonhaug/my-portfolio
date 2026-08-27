@@ -2,149 +2,82 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { motion } from "framer-motion";
 
-const accent = "text-accent";      // orange
-const primary = "text-text";      // primary white
-
-export default function Hero({ name, subheader, onAnimationComplete }) {
+export default function Hero({ name, subheader }) {
   const letters = name.split("");
-  const firstMIdx = letters.findIndex(l => l.toLowerCase() === "m");
-  const firstSIdx = letters.findIndex(l => l.toLowerCase() === "s");
+  const finalName = `${name.slice(0, -2)}.ug`;
+  const firstMIdx = letters.findIndex((letter) => letter.toLowerCase() === "m");
+  const firstSIdx = letters.findIndex((letter) => letter.toLowerCase() === "s");
   const [typedIdx, setTypedIdx] = useState(-1);
-  const [showInfo, setShowInfo] = useState(false);
   const [extraSuffix, setExtraSuffix] = useState("");
 
   useEffect(() => {
-    let idx = -1;
-    const timeouts = [];
-
-    function typeNext() {
-      idx++;
-      setTypedIdx(idx);
-      if (idx < letters.length - 1) {
-        const delay = Math.floor(Math.random() * 200) + 100;
-        timeouts.push(setTimeout(typeNext, delay));
-      } else {
-        // After fully typed, perform: backspace twice, type ".ug", then show info
-        let t = 500; // initial pause after full typing
-
-        // backspace twice
-        timeouts.push(
-          setTimeout(() => setTypedIdx((prev) => Math.max(prev - 1, -1)), t)
-        );
-        t += 150;
-        timeouts.push(
-          setTimeout(() => setTypedIdx((prev) => Math.max(prev - 1, -1)), t)
-        );
-
-        // ensure extraSuffix starts empty, then type '.', 'u', 'g'
-        t += Math.floor(Math.random() * 200) + 100;
-        timeouts.push(setTimeout(() => setExtraSuffix("."), t));
-        t += Math.floor(Math.random() * 200) + 100;
-        timeouts.push(setTimeout(() => setExtraSuffix(".u"), t));
-        t += Math.floor(Math.random() * 200) + 100;
-        timeouts.push(setTimeout(() => setExtraSuffix(".ug"), t));
-
-        // final pause then show subheader/icons
-        t += 240;
-        timeouts.push(
-          setTimeout(() => {
-            setShowInfo(true);
-            if (onAnimationComplete) onAnimationComplete();
-          }, t)
-        );
-      }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTypedIdx(name.length - 3);
+      setExtraSuffix(".ug");
+      return;
     }
 
-    typeNext();
-    return () => timeouts.forEach((id) => clearTimeout(id));
-  }, [letters.length]);
+    let index = -1;
+    const timeouts = [];
+    const later = (callback, delay) => {
+      timeouts.push(window.setTimeout(callback, delay));
+    };
 
-  // Blinking cursor using CSS animation
-  const cursorStyle = {
-    width: "0.4em",
-    height: "0.8em",
-    marginLeft: "0px",
-    verticalAlign: "text_bottom",
-    borderRadius: "1px",
-    background: "var(--tw-color-accent2, #00BFA6)",
-    display: "inline-block",
-    animation: "blink 1s steps(1) infinite",
-    position: "relative",
-    top: "0.2em"
-  };
+    const typeNext = () => {
+      index += 1;
+      setTypedIdx(index);
+
+      if (index < name.length - 1) {
+        later(typeNext, Math.floor(Math.random() * 90) + 65);
+        return;
+      }
+
+      later(() => setTypedIdx((current) => current - 1), 420);
+      later(() => setTypedIdx((current) => current - 1), 560);
+      later(() => setExtraSuffix("."), 760);
+      later(() => setExtraSuffix(".u"), 870);
+      later(() => setExtraSuffix(".ug"), 980);
+    };
+
+    typeNext();
+    return () => timeouts.forEach(window.clearTimeout);
+  }, [name]);
 
   return (
-    <section
-      className="flex flex-col items-center text-center px-6 scale-50 md:scale-100 md:mt-0"
-      style={{
-        alignItems: "center",
-        justifyContent: "flex-start",
-      }}
-    >
-      <style>
-        {`
-          @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-          }
-        `}
-      </style>
-      <div className=" flex justify-center items-center" >
-        <h1 className="text-4xl md:text-4xl font-bold flex justify-center" style={{ transform: "scale(2)" }}>
-          {letters.slice(0, typedIdx + 1).map((char, i) => {
-            let colorClass = primary;
-            if (i === firstMIdx || i === firstSIdx) colorClass = accent;
-            return (
-              <span
-                key={i}
-                className={colorClass}
-                style={{ margin: "0 0px", transition: "opacity 0.2s" }}
-              >
-                {char}
-              </span>
-            );
-          })}
-          <span className={primary} style={{ margin: "0 0px", transition: "opacity 0.2s" }}>{extraSuffix}</span>
-          {/* Cursor appears after the last typed letter */}
-          <span style={cursorStyle} />
-        </h1>
+    <header className="hero">
+      <p className="hero-kicker">hello, i&apos;m</p>
+      <h1 className="hero-name" aria-label={finalName}>
+        <span aria-hidden="true">
+          {letters.slice(0, typedIdx + 1).map((character, index) => (
+            <span
+              className={index === firstMIdx || index === firstSIdx ? "typed-initial" : undefined}
+              key={`${character}-${index}`}
+            >
+              {character}
+            </span>
+          ))}
+          <span className="typed-suffix">{extraSuffix}</span>
+          <span className="typing-caret" />
+        </span>
+      </h1>
+      <p className="hero-role">{subheader}</p>
+      <p className="hero-intro">
+        Software engineer building thoughtful AI products, dependable web systems,
+        and the occasional game.
+      </p>
+      <div className="hero-links" aria-label="Social links">
+        <a href="https://github.com/mikaelskjonhaug" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <FontAwesomeIcon icon={faGithub} />
+        </a>
+        <a href="https://linkedin.com/in/mikaelskjonhaug" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <FontAwesomeIcon icon={faLinkedin} />
+        </a>
+        <a href="mailto:mikaelsk@berkeley.edu" aria-label="Email Mikael">
+          <FontAwesomeIcon icon={faEnvelope} />
+        </a>
       </div>
-
-      {/* Subheader and Icons */}
-      {showInfo && (
-        <>
-          {/* Subheading */}
-          <motion.div
-            className="text-text text-2xl mt-[50px] md:mt-[50px] font-medium scale-100 md:scale-100"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: showInfo ? 1 : 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            {subheader}
-          </motion.div>
-
-          {/* Icons */}
-          <motion.div
-            className="flex space-x-8 mt-[40px] md:mt-[40px] scale-125 md:scale-150"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: showInfo ? 1 : 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <a href="https://github.com/mikaelskjonhaug" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faGithub} className="text-3xl md:text-2xl text-text hover:text-accent transition-colors" />
-            </a>
-            <a href="https://linkedin.com/in/mikaelskjonhaug" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faLinkedin} className="text-3xl md:text-2xl text-text hover:text-accent transition-colors" />
-            </a>
-            <a href="mailto:mikaelsk@berkeley.edu">
-              <FontAwesomeIcon icon={faEnvelope} className="text-3xl md:text-2xl text-text hover:text-accent transition-colors" />
-            </a>
-          </motion.div>
-        </>
-      )}
-    </section>
+    </header>
   );
 }
 

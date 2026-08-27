@@ -1,93 +1,27 @@
-import { FaReact, FaNodeJs, FaPython, FaJava, FaGitAlt, FaDatabase, FaDocker, FaCloud } from "react-icons/fa";
-import { SiJavascript, SiPytest, SiCypress,SiFastapi,SiCplusplus, 
-  SiSwift,SiDjango, SiNumpy, SiPytorch, SiMongodb, SiPostgresql, SiC, SiHeroku, SiRender, SiCloudflare, SiGithub } from "react-icons/si";
+const groups = [
+  ["Languages", ["Python", "JavaScript", "Java", "C++", "C", "Swift", "SQL"]],
+  ["Frameworks", ["Django", "FastAPI", "Node.js", "React", "NumPy", "PyTorch"]],
+  ["Quality", ["Pytest", "Cypress", "Git", "Docker"]],
+  ["Platforms", ["PostgreSQL", "MongoDB", "Cloudflare", "Heroku", "Render", "AWS"]],
+];
 
 export default function Skills() {
-  const languages = [
-    { name: "Python", icon: <FaPython className="text-yellow-500" /> },
-    { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
-    { name: "Java", icon: <FaJava className="text-red-600" /> },
-    { name: "C++", icon: <SiCplusplus className="text-blue-700" /> },
-    { name: "C", icon: <SiC className="text-red-500" /> },
-    { name: "Swift", icon: <SiSwift className="text-orange-400" /> },
-    { name: "SQL", icon: <FaDatabase className="text-indigo-500" /> },
-  ];
-
-  const frameworks = [
-    { name: "Django", icon: <SiDjango className="text-green-700" /> },
-    { name: "FastAPI", icon: <SiFastapi className="text-teal-500" /> },
-    { name: "Node.js", icon: <FaNodeJs className="text-green-500" /> },
-    { name: "React", icon: <FaReact className="text-blue-400" /> },
-    { name: "NumPy", icon: <SiNumpy className="text-blue-400" /> },
-    { name: "PyTorch", icon: <SiPytorch className="text-red-500" /> },
-    { name: "PyTest", icon: <SiPytest className="text-purple-500" /> },
-    { name: "Cypress", icon: <SiCypress className="text-green-400" /> },
-  ];
-  
-  const tools = [
-    { name: "MongoDB", icon: <SiMongodb className="text-green-700" /> },
-    { name: "PostgreSQL", icon: <SiPostgresql className="text-blue-700" /> },
-    { name: "AWS", icon: <FaCloud className="text-orange-400" /> },
-    { name: "Git", icon: <FaGitAlt className="text-orange-600" /> },
-  ];
-
-  const other = [
-    { name: "Cloudflare", icon: <SiCloudflare className="text-orange-500" /> },
-    { name: "Heroku", icon: <SiHeroku className="text-purple-600" /> },
-    { name: "Render", icon: <SiRender className="text-blue-600" /> },
-    { name: "GitHub", icon: <SiGithub className="text-black" /> },
-    { name: "Docker", icon: <FaDocker className="text-blue-500" /> },
-  ]
-
   return (
-    <section className="max-w-3xl mx-auto px-4 text-center">
-    <h2 className="text-accent2 text-xl md:text-3xl font-bold text-center">Skills</h2>
-      <div className="space-y-0">
-        <div>
-          <h3 className="text-accent text-xl text-center scale-[0.75] md:scale-100">Languages</h3>
-          <ul className="flex flex-wrap justify-center">
-            {languages.map((lang) => (
-              <li key={lang.name} className="flex items-center justify-center scale-[0.75] md:scale-100">
-                <span className="text-base">{lang.icon}</span>
-                <span className="text-text text-base">{lang.name}&nbsp;</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h3 className="text-accent text-xl text-center scale-[0.75] md:scale-100">Frameworks / Libraries</h3>
-          <ul className="flex flex-wrap justify-center">
-            {frameworks.map((fw) => (
-              <li key={fw.name} className="flex items-center justify-center scale-[0.75] md:scale-100">
-                <span className="text-base" style={fw.name === "Express.js" ? { WebkitTextStroke: "1px white" } : {}}>{fw.icon}</span>
-                <span className="text-text text-base">{fw.name}&nbsp;</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h3 className="text-accent text-xl text-center scale-[0.75] md:scale-100">Tools &amp; Databases</h3>
-          <ul className="flex flex-wrap justify-center">
-            {tools.map((tool) => (
-              <li key={tool.name} className="flex items-center justify-center scale-[0.75] md:scale-100">
-                <span className="text-base">{tool.icon}</span>
-                <span className="text-text text-base">{tool.name}&nbsp;</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-                <div>
-          <h3 className="text-accent text-xl text-center scale-[0.75] md:scale-100">Other tools</h3>
-          <ul className="flex flex-wrap justify-center">
-            {other.map((tool) => (
-              <li key={tool.name} className="flex items-center justify-center scale-[0.75] md:scale-100">
-                <span className="text-base">{tool.icon}</span>
-                <span className="text-text text-base">{tool.name}&nbsp;</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <div className="section-layout">
+      <header className="section-header">
+        <span>stack.json</span>
+        <h2>Skills</h2>
+      </header>
+      <div className="skill-groups">
+        {groups.map(([label, skills]) => (
+          <div className="skill-group" key={label}>
+            <h3>{label}</h3>
+            <ul>
+              {skills.map((skill) => <li key={skill}>{skill}</li>)}
+            </ul>
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }

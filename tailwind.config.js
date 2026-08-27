@@ -4,18 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: "#242424",      // dark background
-        surface: "#2E2E2E", // cards/sections
-        text: "#EBEBEB",    // primary text
-        muted: "#B5B5B5",   // secondary text
-        accent: "#FF8800",  // orange
-        accent2: "#00BFA6", // teal
-        accentHover: "#FFA04C",
-        borderDim: "#383838",
-      },
-      borderRadius: {
-        xl: "1rem",
-        "2xl": "1.25rem",
+        bg: "#282A36",
+        surface: "#303341",
+        text: "#F8F8F2",
+        muted: "#B6B8CC",
+        accent: "#BD93F9",
+        accent2: "#8BE9FD",
+        accentHover: "#CAA9FA",
+        borderDim: "#44475A",
       },
     },
   },

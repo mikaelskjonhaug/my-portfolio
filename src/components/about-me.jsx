@@ -1,15 +1,25 @@
-import { FaReact, FaNodeJs, FaPython, FaJava, FaGitAlt, FaDatabase, FaDocker, FaCloud } from "react-icons/fa";
-import { SiJavascript, SiCplusplus, SiDjango, SiNumpy, SiFlask, SiPytorch, SiExpress, SiMongodb, SiPostgresql, SiFirebase } from "react-icons/si";
 export default function AboutMe() {
-
   return (
-    <section id="about-me" className="max-w-3xl mx-auto px-4 text-center">
-      <h2 className="text-accent2 text-xl md:text-3xl font-bold text-center">About me</h2>
-      <p className="text-text text-lg text-center">
-        Hi there, I am Mikael Skjonhaug.<br />
-        Software Engineer @ Hortus AI<br />
-        Computer Science @ UC Berkeley 🐻
-      </p>
-    </section>
+    <div className="section-layout">
+      <header className="section-header">
+        <span>about.md</span>
+        <h2>About me</h2>
+      </header>
+      <div className="section-copy">
+        <p>
+          I&apos;m Mikael, a software engineer at Hortus AI and a computer science
+          student at UC Berkeley.
+        </p>
+        <p>
+          I like turning ambitious ideas into reliable products—especially where
+          web engineering, developer tooling, and machine learning meet.
+        </p>
+        <dl className="quick-facts">
+          <div><dt>Based in</dt><dd>Berkeley, CA</dd></div>
+          <div><dt>Currently</dt><dd>Building at Hortus AI</dd></div>
+          <div><dt>Studying</dt><dd>Computer Science</dd></div>
+        </dl>
+      </div>
+    </div>
   );
 }

@@ -1,101 +1,55 @@
-// src/App.jsx
-import "./index.css";            // make sure Tailwind is loaded
-import Hero from "./components/hero.jsx"; // <-- import your component
-import msLogoOrange from "./assets/ms-logo-orange.png";
-import msLogoTeal from "./assets/ms-logo-teal.png";
+import "./index.css";
 import AboutMe from "./components/about-me.jsx";
-import { useState } from "react";
-import { motion } from "framer-motion";
 import Experience from "./components/experience.jsx";
-import Projects from "./components/projects.jsx"
+import Hero from "./components/hero.jsx";
+import Projects from "./components/projects.jsx";
 import Skills from "./components/skills.jsx";
-import FloatingParticles from "./components/FloatingParticles.jsx";
 import SnakeAnimation from "./components/SnakeAnimation.jsx";
 
+const links = ["About", "Skills", "Experience", "Projects"];
+
 function Navbar() {
-  const [logoSrc, setLogoSrc] = useState(msLogoOrange);
-  const handleMouseEnter = () => setLogoSrc(msLogoTeal);
-  const handleMouseLeave = () => setLogoSrc(msLogoOrange);
-  const handleLogoClick = (e) => {
-    e.preventDefault();
-    window.location.href = "/";
-  };
   return (
-    <nav className="fixed top-0 left-0 w-full h-[60px] bg-bg bg-opacity-50 backdrop-blur-md z-50">
-      {/* Mobile: logo centered, no links */}
-      <div className="flex justify-center items-center h-full md:hidden">
-        <button onClick={handleLogoClick} style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}>
-          <img
-            src={logoSrc}
-            alt="Mikael Skjonhaug logo"
-            className="h-[25px] w-auto"
-            style={{ objectFit: "contain" }}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          />
-        </button>
-      </div>
-      {/* Desktop/tablet: logo left, links right */}
-      <div className="hidden md:flex items-end justify-between px-8 h-full w-full">
-        <button onClick={handleLogoClick} style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}>
-          <img
-            src={logoSrc}
-            alt="Mikael Skjonhaug logo"
-            className="h-[30px] w-auto"
-            style={{ objectFit: "contain" }}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          />
-        </button>
-        <div
-          className="flex items-end space-x-8"
-          style={{ position: "relative", top: "-5px" }}
-        >
-          <a href="#about-meme" className="text-base font-semibold text-text hover:text-accent transition-colors">About</a>
-          <a href="#skills" className="text-base font-semibold text-text hover:text-accent transition-colors">Skills</a>
-          <a href="#experience" className="text-base font-semibold text-text hover:text-accent transition-colors">Experience</a>
-          <a href="#projects" className="text-base font-semibold text-text hover:text-accent transition-colors">Projects</a>
-        </div>
+    <nav className="site-nav" aria-label="Primary navigation">
+      <a className="monogram" href="#top" aria-label="Back to top">
+        <span>m</span>s<span>.</span>
+      </a>
+      <div className="nav-links">
+        {links.map((label) => (
+          <a key={label} href={`#${label.toLowerCase()}`}>
+            {label}
+          </a>
+        ))}
       </div>
     </nav>
   );
 }
-
 export default function App() {
-  const [heroComplete, setHeroComplete] = useState(false);
-
   return (
-    <div className="min-h-screen relative">
-      <FloatingParticles count={40} />
+    <div id="top">
       <SnakeAnimation />
-      <div className="relative z-10">
-      <Navbar/>
-      <div className="mt-[60px] md:mt-[150px]">
-      <Hero 
-        name="Mikael Skjonhaug"
-        subheader="SWE • WEBDEV • AI/ML"
-        onAnimationComplete={() => setHeroComplete(true)}
-      />
+      <div className="site-shell">
+        <Navbar />
+        <main className="site-main">
+          <Hero name="Mikael Skjonhaug" subheader="SWE · WEBDEV · AI/ML" />
+          <section id="about" className="portfolio-section">
+            <AboutMe />
+          </section>
+          <section id="skills" className="portfolio-section">
+            <Skills />
+          </section>
+          <section id="experience" className="portfolio-section">
+            <Experience />
+          </section>
+          <section id="projects" className="portfolio-section">
+            <Projects />
+          </section>
+          <footer className="site-footer">
+            <span>© {new Date().getFullYear()} Mikael Skjonhaug</span>
+            <a href="#top">Back to top ↑</a>
+          </footer>
+        </main>
       </div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: heroComplete ? 1 : 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-      <section id="about-meme" className="scroll-mt-[200px] mt-[25px] md:mt-[125px]">
-      <AboutMe/>
-      </section>
-      <section id="skills"  className="scroll-mt-[200px] mt-[50px] md:mt-[125px]">
-      <Skills/>
-      </section>
-      <section id="experience"  className="scroll-mt-[200px] mt-[50px] md:mt-[125px]">
-      <Experience/>
-      </section>
-      <section id="projects"  className="scroll-mt-[200px] mt-[50px] md:mt-[125px] mb-[50px]">
-      <Projects/>
-      </section>
-      </motion.div>
-      </div>
-      </div>
+    </div>
   );
 }

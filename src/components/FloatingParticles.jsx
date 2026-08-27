@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 const generateParticles = (count) => {
   return Array.from({ length: count }, (_, i) => ({
@@ -23,7 +23,7 @@ export default function FloatingParticles({ count = 50 }) {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
       {particles.map((particle) => (
-        <motion.div
+        <Motion.div
           key={particle.id}
           className="absolute rounded-full"
           style={{

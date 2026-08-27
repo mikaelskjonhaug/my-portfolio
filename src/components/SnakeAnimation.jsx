@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 const CELL_SIZE = 20;
 const SNAKE_SPEED = 100; // ms per move
@@ -10,31 +10,12 @@ export default function SnakeAnimation() {
   const [snake, setSnake] = useState([]);
   const [direction, setDirection] = useState(null);
   const [phase, setPhase] = useState("idle"); // idle, fruit, hunting, eating, exiting
-  const [hasEaten, setHasEaten] = useState(false);
-  const [autoMode, setAutoMode] = useState(true);
   const [timesEaten, setTimesEaten] = useState(0); // Track how many fruits eaten (snake grows)
   const timeoutRef = useRef(null);
 
-  // Manual trigger for testing
-  const triggerAnimation = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setIsActive(true);
-    setPhase("fruit");
-  };
-
-  const stopAnimation = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setIsActive(false);
-    setFruit(null);
-    setSnake([]);
-    setDirection(null);
-    setPhase("idle");
-    setHasEaten(false);
-  };
-
   // Start animation on random interval
   useEffect(() => {
-    if (!autoMode) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     // Only schedule if not already active
     if (isActive) return;
 
@@ -54,7 +35,7 @@ export default function SnakeAnimation() {
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [autoMode, isActive]);
+  }, [isActive]);
 
   // Reset and schedule next after animation completes
   const resetAnimation = useCallback(() => {
@@ -63,20 +44,7 @@ export default function SnakeAnimation() {
     setSnake([]);
     setDirection(null);
     setPhase("idle");
-    setHasEaten(false);
-
-    // Schedule next animation only if in auto mode
-    if (autoMode) {
-      // Clear any existing timeout first
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      
-      const delay = Math.random() * 20000 + 15000;
-      timeoutRef.current = setTimeout(() => {
-        setIsActive(true);
-        setPhase("fruit");
-      }, delay);
-    }
-  }, [autoMode]);
+  }, []);
 
   // Phase: Spawn fruit
   useEffect(() => {
@@ -142,7 +110,6 @@ export default function SnakeAnimation() {
           // Check if reached fruit
           if (Math.abs(dx) <= CELL_SIZE && Math.abs(dy) <= CELL_SIZE) {
             setFruit(null);
-            setHasEaten(true);
             setTimesEaten(prev => prev + 1);
             setPhase("exiting");
             // Grow snake by not removing tail this move
@@ -175,7 +142,7 @@ export default function SnakeAnimation() {
 
     const interval = setInterval(moveSnake, SNAKE_SPEED);
     return () => clearInterval(interval);
-  }, [phase, fruit, direction, resetAnimation]);
+  }, [phase, fruit, direction, resetAnimation, snake.length]);
 
   const getNewHead = (head, dir) => {
     switch (dir) {
@@ -199,7 +166,7 @@ export default function SnakeAnimation() {
         <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 5 }}>
           {/* Fruit */}
           {fruit && (
-            <motion.div
+            <Motion.div
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.3 }}
@@ -213,12 +180,12 @@ export default function SnakeAnimation() {
               }}
             >
               🍎
-            </motion.div>
+            </Motion.div>
           )}
 
           {/* Snake */}
           {snake.map((segment, index) => (
-            <motion.div
+            <Motion.div
               key={index}
               className="absolute rounded-sm"
               style={{
@@ -228,9 +195,9 @@ export default function SnakeAnimation() {
                 height: CELL_SIZE - 2,
                 backgroundColor:
                   index === 0
-                    ? "rgba(0, 191, 166, 0.9)"
-                    : `rgba(0, 191, 166, ${0.7 - index * 0.1})`,
-                boxShadow: index === 0 ? "0 0 8px rgba(0, 191, 166, 0.6)" : "none",
+                    ? "rgba(80, 250, 123, 0.9)"
+                    : `rgba(80, 250, 123, ${0.7 - index * 0.1})`,
+                boxShadow: index === 0 ? "0 0 8px rgba(80, 250, 123, 0.55)" : "none",
               }}
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
