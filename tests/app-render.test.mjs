@@ -17,11 +17,13 @@ test("portfolio content is visible before the hero animation completes", async (
   const html = renderToStaticMarkup(createElement(App));
 
   for (const marker of [
-    'href="#about"',
+    'href="#blog"',
     'href="#skills"',
     'href="#experience"',
     'href="#projects"',
-    "About me",
+    'aria-label="Quick navigation"',
+    "Blog",
+    "No posts yet.",
     "Skills",
     "Experience",
     "Selected work",
@@ -31,4 +33,27 @@ test("portfolio content is visible before the hero animation completes", async (
   }
   assert.match(html, /aria-label="mikaelskjonha\.ug"/);
   assert.doesNotMatch(html, /opacity:0/);
+});
+
+test("keyboard shortcuts map to menu and numbered navigation actions", async (t) => {
+  const vite = await createServer({
+    appType: "custom",
+    server: { hmr: false, middlewareMode: true, ws: false },
+  });
+  t.after(() => vite.close());
+
+  const { getNavigationAction } = await vite.ssrLoadModule(
+    "/src/components/command-menu.jsx",
+  );
+  const event = (key, extra = {}) => ({ key, target: { tagName: "BODY" }, ...extra });
+
+  assert.equal(getNavigationAction(event("k", { metaKey: true }), 4), "menu");
+  assert.equal(getNavigationAction(event("k", { ctrlKey: true }), 4), "menu");
+  assert.equal(getNavigationAction(event("1"), 4), 0);
+  assert.equal(getNavigationAction(event("4"), 4), 3);
+  assert.equal(getNavigationAction(event("5"), 4), null);
+  assert.equal(
+    getNavigationAction(event("1", { target: { tagName: "INPUT" } }), 4),
+    null,
+  );
 });

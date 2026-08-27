@@ -1,11 +1,11 @@
 import "./index.css";
-import AboutMe from "./components/about-me.jsx";
+import CommandMenu from "./components/command-menu.jsx";
 import Experience from "./components/experience.jsx";
 import Hero from "./components/hero.jsx";
 import Projects from "./components/projects.jsx";
 import Skills from "./components/skills.jsx";
 
-const links = ["About", "Skills", "Experience", "Projects"];
+const links = ["Blog", "Skills", "Experience", "Projects"];
 
 function Navbar() {
   return (
@@ -14,9 +14,9 @@ function Navbar() {
         <span>m</span>s<span>.</span>
       </a>
       <div className="nav-links">
-        {links.map((label) => (
+        {links.map((label, index) => (
           <a key={label} href={`#${label.toLowerCase()}`}>
-            {label}
+            <kbd>{index + 1}</kbd> {label}
           </a>
         ))}
       </div>
@@ -28,10 +28,17 @@ export default function App() {
     <div id="top">
       <div className="site-shell">
         <Navbar />
+        <CommandMenu links={links} />
         <main className="site-main">
           <Hero name="mikaelskjonhaug" />
-          <section id="about" className="portfolio-section">
-            <AboutMe />
+          <section id="blog" className="portfolio-section">
+            <div className="section-layout">
+              <header className="section-header">
+                <span>blog/</span>
+                <h2>Blog</h2>
+              </header>
+              <p className="section-empty">No posts yet.</p>
+            </div>
           </section>
           <section id="skills" className="portfolio-section">
             <Skills />
