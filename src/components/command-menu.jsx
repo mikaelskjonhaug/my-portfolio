@@ -1,18 +1,18 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function getNavigationAction(event, linkCount) {
-  const tag = event.target?.tagName;
-
-  if (event.target?.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(tag)) {
-    return null;
-  }
-
   if (event.key.toLowerCase() === "k" && (event.metaKey || event.ctrlKey)) {
     return "menu";
   }
 
   if (event.key === "Escape") return "close";
+
+  const tag = event.target?.tagName;
+
+  if (event.target?.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(tag)) {
+    return null;
+  }
 
   if (event.key === "0" && !event.metaKey && !event.ctrlKey && !event.altKey) {
     return "top";
@@ -28,6 +28,23 @@ export function getNavigationAction(event, linkCount) {
 
 export default function CommandMenu({ links, socialLinks }) {
   const dialogRef = useRef(null);
+  const inputRef = useRef(null);
+  const resultsRef = useRef(null);
+  const [query, setQuery] = useState("");
+  const navigationItems = [
+    { label: "Hero", href: "#top", shortcut: 0 },
+    ...links.map((label, index) => ({
+      label,
+      href: `#${label.toLowerCase()}`,
+      shortcut: index + 1,
+    })),
+  ];
+  const matches = ({ label }) => label.toLowerCase().includes(query.trim().toLowerCase());
+  const navigationResults = navigationItems.filter(matches);
+  const socialResults = socialLinks.filter(matches);
+  const shortcut = typeof navigator !== "undefined" && /Mac|iPhone|iPad|iPod/.test(navigator.platform)
+    ? "⌘ K"
+    : "Ctrl K";
 
   useEffect(() => {
     const onKeyDown = (event) => {
@@ -35,7 +52,11 @@ export default function CommandMenu({ links, socialLinks }) {
 
       if (action === "menu") {
         event.preventDefault();
-        if (!dialogRef.current.open) dialogRef.current.showModal();
+        if (!dialogRef.current.open) {
+          setQuery("");
+          dialogRef.current.showModal();
+        }
+        window.requestAnimationFrame(() => inputRef.current?.focus());
       } else if (action === "close" && dialogRef.current.open) {
         event.preventDefault();
         dialogRef.current.close();
@@ -53,8 +74,30 @@ export default function CommandMenu({ links, socialLinks }) {
   }, [links]);
 
   const close = () => dialogRef.current.close();
+  const open = () => {
+    if (!dialogRef.current.open) {
+      setQuery("");
+      dialogRef.current.showModal();
+      window.requestAnimationFrame(() => inputRef.current?.focus());
+    }
+  };
+  const focusOnHover = (event) => event.currentTarget.focus();
+  const openFirstResult = (event) => {
+    if (event.key === "Enter") {
+      const firstResult = resultsRef.current?.querySelector("a");
+      if (firstResult) {
+        event.preventDefault();
+        firstResult.click();
+      }
+    }
+  };
 
   return (
+    <>
+      <button type="button" className="command-trigger" onClick={open}>
+        <span>command menu</span>
+        <kbd>{shortcut}</kbd>
+      </button>
     <dialog
       ref={dialogRef}
       className="command-menu"
@@ -63,40 +106,53 @@ export default function CommandMenu({ links, socialLinks }) {
     >
       <div className="command-panel">
         <header className="command-header">
-          <span><strong>&gt;_</strong> jump to</span>
+          <label className="command-search">
+            <strong>&gt;_</strong>
+            <input
+              ref={inputRef}
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              onKeyDown={openFirstResult}
+              placeholder="Search commands"
+              aria-label="Search commands"
+            />
+          </label>
           <button type="button" onClick={close} aria-label="Close quick navigation">
             esc
           </button>
         </header>
-        <nav className="command-links" aria-label="Command navigation">
-          <a href="#top" onClick={close}>
-            <kbd>0</kbd>
-            <span>Hero</span>
-            <span aria-hidden="true">↵</span>
-          </a>
-          {links.map((label, index) => (
-            <a key={label} href={`#${label.toLowerCase()}`} onClick={close}>
-              <kbd>{index + 1}</kbd>
+        <nav ref={resultsRef} className="command-links" aria-label="Command navigation">
+          {navigationResults.map(({ label, href, shortcut }) => (
+            <a key={label} href={href} onClick={close} onMouseEnter={focusOnHover}>
+              <kbd>{shortcut}</kbd>
               <span>{label}</span>
               <span aria-hidden="true">↵</span>
             </a>
           ))}
-          <span className="command-group-label">connect</span>
-          {socialLinks.map(({ label, href }) => (
+          {socialResults.length > 0 && (
+            <span className="command-group-label">connect</span>
+          )}
+          {socialResults.map(({ label, href }) => (
             <a
               key={label}
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
               onClick={close}
+              onMouseEnter={focusOnHover}
             >
               <span className="command-social-mark" aria-hidden="true">↗</span>
               <span>{label}</span>
               <span aria-hidden="true">↵</span>
             </a>
           ))}
+          {navigationResults.length === 0 && socialResults.length === 0 && (
+            <p className="command-empty" role="status">No commands found</p>
+          )}
         </nav>
       </div>
     </dialog>
+    </>
   );
 }

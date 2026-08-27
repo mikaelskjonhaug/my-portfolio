@@ -28,6 +28,7 @@ function Navbar() {
           </a>
         ))}
       </div>
+      <CommandMenu links={links} socialLinks={socialLinks} />
     </nav>
   );
 }
@@ -36,7 +37,6 @@ export default function App() {
     <div id="top">
       <div className="site-shell">
         <Navbar />
-        <CommandMenu links={links} socialLinks={socialLinks} />
         <main className="site-main">
           <Hero name="mikaelskjonhaug" socialLinks={socialLinks} />
           <section id="blog" className="portfolio-section">

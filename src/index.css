@@ -127,6 +127,41 @@ button:focus-visible {
   transform: translateX(0.2rem);
 }
 
+.command-trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  text-align: left;
+  transition: color 160ms ease, transform 160ms ease;
+  white-space: nowrap;
+}
+
+.command-trigger:hover {
+  color: var(--cyan);
+  transform: translateX(0.2rem);
+}
+
+.command-trigger kbd {
+  min-width: 2.75rem;
+  padding: 0.05rem 0.3rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.25rem;
+  background: var(--surface);
+  color: var(--muted);
+  font: inherit;
+  text-align: center;
+}
+
 .command-menu {
   inset: 0;
   width: min(92vw, 30rem);
@@ -163,10 +198,32 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.75rem;
   padding: 0.8rem 0.9rem;
   border-bottom: 1px solid var(--rule);
   color: var(--muted);
   font-size: 0.72rem;
+}
+
+.command-search {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.command-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+}
+
+.command-search input::placeholder {
+  color: var(--muted);
 }
 
 .command-header strong {
@@ -190,6 +247,8 @@ button:focus-visible {
 
 .command-links {
   display: grid;
+  max-height: 65vh;
+  overflow-y: auto;
   padding: 0.4rem;
 }
 
@@ -213,8 +272,7 @@ button:focus-visible {
   font-size: 0.85rem;
 }
 
-.command-links a:hover,
-.command-links a:focus-visible {
+.command-links a:focus {
   background: var(--rule);
   color: var(--cyan);
   outline-offset: -2px;
@@ -238,9 +296,16 @@ button:focus-visible {
   opacity: 0;
 }
 
-.command-links a:hover > span:last-child,
-.command-links a:focus-visible > span:last-child {
+.command-links a:focus > span:last-child {
   opacity: 1;
+}
+
+.command-empty {
+  margin: 0;
+  padding: 2rem 1rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-align: center;
 }
 
 .site-main {
