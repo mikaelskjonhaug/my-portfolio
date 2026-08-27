@@ -1,29 +1,80 @@
-export default function EntryDropdown({ logo, title, subtitle, meta, overview, link, linkLabel, name }) {
+const slugify = (s) => s.toLowerCase().replace(/\s+/g, "_");
+
+function Row({ slug, field, comma, children }) {
+  return (
+    <div className="json-row" title={`${slug}.${field}`}>
+      <span className="json-key">{field}</span>
+      <span className="json-punct">:</span>
+      <span className="json-value">
+        {children}
+        {comma && <span className="json-punct">,</span>}
+      </span>
+    </div>
+  );
+}
+
+export default function EntryDropdown({ logo, title, type, typeKey = "type", tools, toolsKey = "tools", overview, link, linkLabel, name }) {
   const Logo = logo;
+  const slug = slugify(title);
 
   return (
-    <details className="entry" name={name}>
+    <details className="entry json-entry" name={name}>
       <summary>
-        {typeof Logo === "string"
-          ? <img src={Logo} alt="" />
-          : <span className="project-icon"><Logo aria-hidden="true" /></span>}
-        <span className="entry-title">
-          <strong>{title}</strong>
-          <span>{subtitle}</span>
+        <span className="json-brace">{"{"}</span>
+        <span className="json-row json-row-head">
+          <span className="json-key">logo</span>
+          <span className="json-punct">:</span>
+          <span className="json-logo" title={`${slug}.logo`}>
+            {typeof Logo === "string"
+              ? <img src={Logo} alt="" />
+              : <span className="project-icon"><Logo aria-hidden="true" /></span>}
+          </span>
+          <span className="json-punct">,</span>
+          <span className="json-key">title</span>
+          <span className="json-punct">:</span>
+          <span className="json-string" title={`${slug}.title`}>"{title}"</span>
+          <span className="json-punct">,</span>
+          <span className="json-fold" aria-hidden="true">…</span>
         </span>
-        {meta}
-        <span className="entry-toggle" aria-hidden="true">+</span>
+        <span className="json-brace json-brace-inline">{"}"}</span>
       </summary>
+
       <div className="entry-details">
-        <ul>
-          {overview.map((item) => <li key={item}>{item}</li>)}
-        </ul>
+        <Row slug={slug} field={typeKey} comma>
+          <span className="json-string">"{type}"</span>
+        </Row>
+
+        <Row slug={slug} field={toolsKey} comma>
+          {Array.isArray(tools) ? (
+            <>
+              <span className="json-punct">[</span>
+              {tools.map((t, i) => (
+                <span key={t}>
+                  <span className="json-string">"{t}"</span>
+                  {i < tools.length - 1 && <span className="json-punct">, </span>}
+                </span>
+              ))}
+              <span className="json-punct">]</span>
+            </>
+          ) : (
+            <span className="json-string">"{tools}"</span>
+          )}
+        </Row>
+
+        <Row slug={slug} field="overview" comma={Boolean(link)}>
+          <span className="json-string">"{overview}"</span>
+        </Row>
+
         {link && (
-          <a href={link} target="_blank" rel="noopener noreferrer">
-            {linkLabel} ↗
-          </a>
+          <Row slug={slug} field="link">
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              {linkLabel} ↗
+            </a>
+          </Row>
         )}
       </div>
+
+      <div className="json-brace json-brace-close" aria-hidden="true">{"}"}</div>
     </details>
   );
 }

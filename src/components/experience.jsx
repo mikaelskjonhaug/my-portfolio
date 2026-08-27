@@ -7,9 +7,7 @@ const experiences = [
     logo: hortusLogo,
     title: "Software Engineer",
     company: "Hortus AI",
-    overview: [
-      "Lead Engineer primarily working on the backend for Hortus Trellis.",
-    ],
+    overview: "Lead Engineer primarily working on the backend for Hortus Trellis.",
     duration: "Aug 2025 — Present",
     link: "https://trellis.hortus.ai/",
   },
@@ -17,9 +15,7 @@ const experiences = [
     logo: washingtonLogo,
     title: "Assistant Coach",
     company: "Washington Justice",
-    overview: [
-      "Assistant Coach for the Overwatch League team, Washington Justice.",
-    ],
+    overview: "Assistant Coach for the Overwatch League team, Washington Justice.",
     duration: "Aug 2018 — Dec 2019",
     link: "https://www.washington-justice.com/",
   },
@@ -39,8 +35,10 @@ export default function Experience() {
             name="experience"
             logo={experience.logo}
             title={experience.company}
-            subtitle={experience.title}
-            meta={<time>{experience.duration}</time>}
+            type={experience.title}
+            typeKey="role"
+            tools={experience.duration}
+            toolsKey="duration"
             overview={experience.overview}
             link={experience.link}
             linkLabel={`Visit ${experience.company}`}

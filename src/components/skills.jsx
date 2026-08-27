@@ -1,8 +1,8 @@
 const groups = [
-  ["Languages", ["Python", "JavaScript", "C"]],
-  ["Frameworks", ["Django", "FastAPI", "Node.js", "React"]],
-  ["Databases", ["PostgreSQL", "MongoDB"]],
-  ["Cloud", ["AWS", "Google Cloud"]]
+  ["languages", ["Python", "JavaScript", "C"]],
+  ["frameworks", ["Django", "FastAPI", "Node.js", "React"]],
+  ["databases", ["PostgreSQL", "MongoDB"]],
+  ["cloud", ["AWS", "Google Cloud"]]
 ];
 
 export default function Skills() {
@@ -12,16 +12,16 @@ export default function Skills() {
         <span>skills.txt</span>
         <h2>Skills</h2>
       </header>
-      <div className="skill-groups">
+      <pre className="skill-plaintext">
         {groups.map(([label, skills]) => (
-          <div className="skill-group" key={label}>
-            <h3>{label}</h3>
-            <ul>
-              {skills.map((skill) => <li key={skill}>{skill}</li>)}
-            </ul>
-          </div>
+          <span className="skill-line" key={label}>
+            <span className="skill-key">{label}</span>
+            <span className="skill-punct">:</span> {skills.join(", ")}
+            <span className="skill-newline">\n</span>
+            {"\n"}
+          </span>
         ))}
-      </div>
+      </pre>
     </div>
   );
 }

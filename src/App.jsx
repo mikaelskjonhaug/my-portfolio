@@ -5,7 +5,7 @@ import Hero from "./components/hero.jsx";
 import Projects from "./components/projects.jsx";
 import Skills from "./components/skills.jsx";
 
-const links = ["Blog", "Skills", "Experience", "Projects"];
+const links = ["Blog", "Experience", "Projects", "Skills"];
 const socialLinks = [
   { label: "GitHub", href: "https://github.com/mikaelskjonhaug" },
   { label: "LinkedIn", href: "https://linkedin.com/in/mikaelskjonhaug" },
@@ -48,14 +48,14 @@ export default function App() {
               <p className="section-empty">No posts yet.</p>
             </div>
           </section>
-          <section id="skills" className="portfolio-section">
-            <Skills />
-          </section>
           <section id="experience" className="portfolio-section">
             <Experience />
           </section>
           <section id="projects" className="portfolio-section">
             <Projects />
+          </section>
+          <section id="skills" className="portfolio-section">
+            <Skills />
           </section>
           <footer className="site-footer">
             <span>© {new Date().getFullYear()} Mikael Skjonhaug</span>
