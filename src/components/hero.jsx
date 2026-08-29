@@ -16,6 +16,32 @@ export default function Hero({ name, socialLinks }) {
   const firstSIdx = letters.findIndex((letter) => letter.toLowerCase() === "s");
   const [typedIdx, setTypedIdx] = useState(-1);
   const [extraSuffix, setExtraSuffix] = useState("");
+  const [activity, setActivity] = useState(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch("http://localhost:3000/activity", { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("Activity request failed");
+        return response.json();
+      })
+      .then((data) => {
+        if (
+          Number.isInteger(data.privateCommits) &&
+          Array.isArray(data.publicRepositories) &&
+          data.publicRepositories.every(
+            (repository) =>
+              typeof repository.name === "string" && Number.isInteger(repository.commits),
+          )
+        ) {
+          setActivity(data);
+        }
+      })
+      .catch(() => { });
+
+    return () => controller.abort();
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -80,6 +106,32 @@ export default function Hero({ name, socialLinks }) {
           </a>
         ))}
       </div>
+      <aside className="hero-activity" aria-live="polite" aria-busy={!activity}>
+        <span className="hero-activity-label">activity / 7d</span>
+        <div className={`hero-activity-content${activity ? " is-loaded" : ""}`}>
+          {activity ? (
+            <p>
+              In the last 7 days I wrote{" "}
+              {activity.publicRepositories.map(({ name: repositoryName, commits }, index) => (
+                <span key={repositoryName}>
+                  {index > 0 && ", "}
+                  <strong>
+                    {commits} commit{commits === 1 ? "" : "s"}
+                  </strong>{" "}
+                  in {repositoryName}
+                </span>
+              ))}
+              {activity.publicRepositories.length > 0 && ", and "}
+              <strong>
+                {activity.privateCommits} commit{activity.privateCommits === 1 ? "" : "s"}
+              </strong>{" "}
+              in private repositories.
+            </p>
+          ) : (
+            <p>loading…</p>
+          )}
+        </div>
+      </aside>
     </header>
   );
 }

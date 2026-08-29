@@ -407,6 +407,52 @@ button:focus-visible {
   color: var(--purple);
 }
 
+.hero-activity {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  max-width: 42rem;
+  min-height: 4.35rem;
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+.hero-activity-content {
+  opacity: 0.55;
+  transform: translateY(0.2rem);
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.hero-activity-content.is-loaded {
+  opacity: 1;
+  transform: none;
+}
+
+.hero-activity-label {
+  color: var(--purple);
+  white-space: nowrap;
+}
+
+.hero-activity p {
+  margin: 0;
+}
+
+.hero-activity strong {
+  color: var(--cyan);
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-activity-content {
+    transition: none;
+  }
+}
+
 .portfolio-section {
   scroll-margin-top: 3rem;
   border-bottom: 1px solid var(--rule);
@@ -834,6 +880,11 @@ button:focus-visible {
 
   .hero-name {
     font-size: clamp(2rem, 10vw, 3.2rem);
+  }
+
+  .hero-activity {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
   }
 
   .portfolio-section {
