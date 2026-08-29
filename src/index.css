@@ -412,10 +412,8 @@ button:focus-visible {
   grid-template-columns: auto minmax(0, 1fr);
   gap: 1rem;
   max-width: 42rem;
-  min-height: 4.35rem;
+  min-height: 4em;
   margin-top: 2.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--rule);
   color: var(--muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.78rem;
@@ -445,6 +443,15 @@ button:focus-visible {
 .hero-activity strong {
   color: var(--cyan);
   font-weight: 500;
+}
+
+.hero-activity-repo {
+  color: var(--purple);
+}
+
+.hero-activity-repo:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 @media (prefers-reduced-motion: reduce) {

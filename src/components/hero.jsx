@@ -118,7 +118,15 @@ export default function Hero({ name, socialLinks }) {
                   <strong>
                     {commits} commit{commits === 1 ? "" : "s"}
                   </strong>{" "}
-                  in {repositoryName}
+                  in{" "}
+                  <a
+                    className="hero-activity-repo"
+                    href={`https://github.com/mikaelskjonhaug/${encodeURIComponent(repositoryName)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {repositoryName}
+                  </a>
                 </span>
               ))}
               {activity.publicRepositories.length > 0 && ", and "}
