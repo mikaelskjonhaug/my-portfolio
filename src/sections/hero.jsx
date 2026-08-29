@@ -9,6 +9,8 @@ const socialIcons = {
   Email: faEnvelope,
 };
 
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 export default function Hero({ name, socialLinks }) {
   const letters = name.split("");
   const finalName = `${name.slice(0, -2)}.ug`;
@@ -21,7 +23,7 @@ export default function Hero({ name, socialLinks }) {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch("http://localhost:3000/activity", { signal: controller.signal })
+    fetch(`${backendURL}/activity`, { signal: controller.signal })
       .then((response) => {
         if (!response.ok) throw new Error("Activity request failed");
         return response.json();

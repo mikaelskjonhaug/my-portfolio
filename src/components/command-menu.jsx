@@ -104,7 +104,7 @@ export default function CommandMenu({ links, socialLinks }) {
     <>
       <button type="button" className="command-trigger" onClick={open}>
         <span className="command-trigger-label">command menu</span>
-        <span className="command-trigger-label-mobile">click to open command menu</span>
+        <span className="command-trigger-label-mobile">tap to open command menu</span>
         <span className="command-trigger-shortcut" aria-label={`${shortcutModifier} plus K`}>
           <kbd>{shortcutModifier}</kbd>
           <span aria-hidden="true">+</span>

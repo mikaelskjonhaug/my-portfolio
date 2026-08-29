@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const guestbookUrl = "http://localhost:3000/guestbook";
-
+const guestbookUrl = `${import.meta.env.VITE_BACKEND_URL}/guestbook`;
+console.log(guestbookUrl)
 export default function Guestbook() {
   const [entries, setEntries] = useState([]);
   const [loadFailed, setLoadFailed] = useState(false);
