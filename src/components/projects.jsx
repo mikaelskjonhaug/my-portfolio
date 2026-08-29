@@ -7,14 +7,6 @@ import qwenLogo from "../assets/qwen_logo.png";
 
 const projects = [
   {
-    logo: Baby,
-    title: "Beebo",
-    type: "SaaS",
-    tools: ["Python", "FastAPI", "React", "PostgreSQL"],
-    overview: "WIP — a SaaS platform for parents to track and analyze their baby's growth, health, and development.",
-    link: "https://github.com/mikaelskjonhaug/Beebo",
-  },
-  {
     logo: riscvCpu,
     title: "RISC-V CPU",
     type: "Computer Architecture",
@@ -28,6 +20,14 @@ const projects = [
     tools: ["Python", "PyTorch", "Transformers"],
     overview: "Full fine-tune of Qwen2.5-0.5B-Instruct on ML exam multiple-choice questions, improving accuracy 2x while preserving general reasoning.",
   },  
+  {
+    logo: Baby,
+    title: "Beebo",
+    type: "Web App",
+    tools: ["Python", "FastAPI", "React", "PostgreSQL"],
+    overview: "WIP — a SaaS platform for parents to track and analyze their baby's growth, health, and development.",
+    link: "https://github.com/mikaelskjonhaug/Beebo",
+  },
   {
     logo: snakeLogo,
     title: "Snake AI",
