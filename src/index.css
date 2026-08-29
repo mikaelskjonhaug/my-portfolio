@@ -155,15 +155,29 @@ button:focus-visible {
   display: none;
 }
 
-.command-trigger kbd {
-  min-width: 2.75rem;
+.command-trigger-shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.command-trigger-shortcut kbd {
+  display: inline-flex;
+  min-width: 1.45rem;
+  height: 1.45rem;
+  align-items: center;
+  justify-content: center;
   padding: 0.05rem 0.3rem;
   border: 1px solid var(--rule);
   border-radius: 0.25rem;
   background: var(--surface);
   color: var(--muted);
-  font: inherit;
+  font: 0.75rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   text-align: center;
+}
+
+.command-trigger-shortcut kbd:first-child {
+  font-size: 1.3rem;
 }
 
 .command-menu {
@@ -266,7 +280,12 @@ button:focus-visible {
   text-transform: uppercase;
 }
 
-.command-links a {
+.command-group-label-first {
+  padding-top: 0.25rem;
+  border-top: 0;
+}
+
+.command-links :is(a, button) {
   display: grid;
   grid-template-columns: 1.75rem 1fr auto;
   gap: 0.7rem;
@@ -276,7 +295,17 @@ button:focus-visible {
   font-size: 0.85rem;
 }
 
-.command-links a:is(:focus, :hover) {
+.command-links button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.command-links :is(a, button):is(:focus, :hover) {
   background: var(--rule);
   color: var(--cyan);
   outline-offset: -2px;
@@ -295,13 +324,32 @@ button:focus-visible {
   text-align: center;
 }
 
-.command-links a > span:last-child {
+.command-links :is(a, button) > span:last-child {
   color: var(--purple);
   opacity: 0;
 }
 
-.command-links a:is(:focus, :hover) > span:last-child {
+.command-links :is(a, button):is(:focus, :hover) > span:last-child {
   opacity: 1;
+}
+
+.guestbook-dialog {
+  width: min(92vw, 48rem);
+  margin-top: 8vh;
+}
+
+.guestbook-dialog-panel {
+  max-height: 84vh;
+  overflow-y: auto;
+}
+
+.guestbook-dialog-body {
+  padding: 1.25rem;
+}
+
+.guestbook-dialog .section-layout {
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
 }
 
 .command-empty {
@@ -445,12 +493,12 @@ button:focus-visible {
 }
 
 .hero-activity strong {
-  color: var(--cyan);
+  color: var(--purple);
   font-weight: 500;
 }
 
 .hero-activity-repo {
-  color: var(--purple);
+  color: var(--cyan);
 }
 
 .hero-activity-repo:hover {
@@ -663,15 +711,21 @@ button:focus-visible {
 }
 
 .guestbook-entry {
-  display: grid;
-  grid-template-columns: 1rem minmax(0, 1fr);
-  gap: 0.65rem;
   padding: 1.2rem 0;
   border-bottom: 1px solid var(--rule);
 }
 
-.guestbook-prompt {
-  color: var(--cyan);
+.guestbook-entry-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.guestbook-entry-header time {
+  margin-left: auto;
 }
 
 .guestbook-entry p {
@@ -683,8 +737,6 @@ button:focus-visible {
 
 .guestbook-entry footer {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 0.8rem;
   margin-top: 0.5rem;
   color: var(--muted);
   font-size: 0.7rem;
@@ -987,7 +1039,7 @@ button:focus-visible {
   }
 
   .command-trigger-label,
-  .command-trigger kbd {
+  .command-trigger-shortcut {
     display: none;
   }
 

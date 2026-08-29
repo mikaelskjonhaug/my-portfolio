@@ -73,13 +73,13 @@ export default function Guestbook() {
         <form className="guestbook-form" onSubmit={submit}>
           <label>
             <span>name <small>(optional)</small></span>
-            <input name="name" autoComplete="name" placeholder="Anonymous" />
+            <input name="name" autoComplete="name" placeholder="Your name" />
           </label>
           <label>
             <span>entry</span>
             <textarea name="entry" rows="3" required placeholder="Leave a note…" />
           </label>
-          <button type="submit">Sign guestbook <span aria-hidden="true">↵</span></button>
+          <button type="submit">Submit <span aria-hidden="true"></span></button>
         </form>
 
         <div className="guestbook-feed" aria-live="polite">
@@ -91,23 +91,28 @@ export default function Guestbook() {
           )}
           {entries.map((item) => (
             <article className="guestbook-entry" key={item.id}>
-              <span className="guestbook-prompt" aria-hidden="true">&gt;</span>
-              <div>
+              <div className="guestbook-entry-body">
+                {(item.name || item.created_at) && (
+                  <header className="guestbook-entry-header">
+                    {item.name && <strong>{item.name}</strong>}
+                    {item.created_at && (
+                      <time dateTime={item.created_at}>
+                        {new Date(item.created_at).toLocaleDateString(undefined, {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </time>
+                    )}
+                  </header>
+                )}
                 <p>{item.entry}</p>
-                <footer>
-                  <strong>{item.name || "Anonymous"}</strong>
-                  {item.created_at && (
-                    <time dateTime={item.created_at}>
-                      {new Date(item.created_at).toLocaleDateString(undefined, {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                    </time>
-                  )}
-                  {item.local && !item.failed && <span>saving…</span>}
-                  {item.failed && <span className="guestbook-error">not saved</span>}
-                </footer>
+                {(item.local || item.failed) && (
+                  <footer>
+                    {item.local && !item.failed && <span>saving…</span>}
+                    {item.failed && <span className="guestbook-error">not saved</span>}
+                  </footer>
+                )}
               </div>
             </article>
           ))}
