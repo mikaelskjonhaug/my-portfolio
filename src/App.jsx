@@ -1,12 +1,13 @@
 import "./index.css";
 import CommandMenu from "./components/command-menu.jsx";
 import Experience from "./components/experience.jsx";
+import Guestbook from "./components/guestbook.jsx";
 import Hero from "./components/hero.jsx";
 import Projects from "./components/projects.jsx";
 import Skills from "./components/skills.jsx";
 import { posts } from "./blog/index.js";
 
-const links = ["Blog", "Experience", "Projects", "Skills"];
+const links = ["Blog", "Experience", "Projects", "Skills", "Guestbook"];
 const socialLinks = [
   { label: "GitHub", href: "https://github.com/mikaelskjonhaug" },
   { label: "LinkedIn", href: "https://linkedin.com/in/mikaelskjonhaug" },
@@ -89,6 +90,9 @@ export default function App() {
           </section>
           <section id="skills" className="portfolio-section">
             <Skills />
+          </section>
+          <section id="guestbook" className="portfolio-section">
+            <Guestbook />
           </section>
           <footer className="site-footer">
             <span>© {new Date().getFullYear()} Mikael Skjonhaug</span>

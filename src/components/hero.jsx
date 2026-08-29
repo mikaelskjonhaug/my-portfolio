@@ -111,10 +111,26 @@ export default function Hero({ name, socialLinks }) {
         <div className={`hero-activity-content${activity ? " is-loaded" : ""}`}>
           {activity ? (
             <p>
-              In the last 7 days I wrote{" "}
-              {activity.publicRepositories.map(({ name: repositoryName, commits }, index) => (
-                <span key={repositoryName}>
-                  {index > 0 && ", "}
+              {activity.publicRepositories.length > 0 && (
+                <span className="hero-activity-line">
+                  <strong>
+                    {activity.publicRepositories[0].commits} commit
+                    {activity.publicRepositories[0].commits === 1 ? "" : "s"}
+                  </strong>{" "}
+                  in{" "}
+                  <a
+                    className="hero-activity-repo"
+                    href={`https://github.com/mikaelskjonhaug/${encodeURIComponent(activity.publicRepositories[0].name)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {activity.publicRepositories[0].name}
+                  </a>
+                  {","}
+                </span>
+              )}
+              {activity.publicRepositories.slice(1).map(({ name: repositoryName, commits }) => (
+                <span className="hero-activity-line" key={repositoryName}>
                   <strong>
                     {commits} commit{commits === 1 ? "" : "s"}
                   </strong>{" "}
@@ -127,13 +143,15 @@ export default function Hero({ name, socialLinks }) {
                   >
                     {repositoryName}
                   </a>
+                  {","}
                 </span>
               ))}
-              {activity.publicRepositories.length > 0 && ", and "}
-              <strong>
-                {activity.privateCommits} commit{activity.privateCommits === 1 ? "" : "s"}
-              </strong>{" "}
-              in private repositories.
+              <span className="hero-activity-line">
+                <strong>
+                  {activity.privateCommits} commit{activity.privateCommits === 1 ? "" : "s"}
+                </strong>{" "}
+                in private repositories.
+              </span>
             </p>
           ) : (
             <p>loading…</p>
