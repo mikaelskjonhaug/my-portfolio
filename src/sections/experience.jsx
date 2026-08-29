@@ -1,4 +1,4 @@
-import EntryDropdown from "./entry-dropdown";
+import EntryDropdown from "../components/entry-dropdown";
 import hortusLogo from "../assets/Hortus-logo.webp";
 import washingtonLogo from "../assets/Washington_logo.webp";
 

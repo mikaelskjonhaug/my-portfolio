@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Guestbook from "./guestbook.jsx";
+import Guestbook from "../sections/guestbook.jsx";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function getNavigationAction(event, linkCount) {
@@ -111,113 +111,113 @@ export default function CommandMenu({ links, socialLinks }) {
           <kbd>K</kbd>
         </span>
       </button>
-    <dialog
-      ref={dialogRef}
-      className="command-menu"
-      aria-label="Quick navigation"
-      onClick={(event) => event.target === event.currentTarget && close()}
-    >
-      <div className="command-panel">
-        <header className="command-header">
-          <label className="command-search">
-            <strong>&gt;_</strong>
-            <input
-              ref={inputRef}
-              type="search"
-              value={query}
-              onChange={(event) => {
-                setQuery(event.target.value);
-                setHovered(null);
-              }}
-              onKeyDown={openActiveResult}
-              placeholder="Search commands"
-              aria-label="Search commands"
-            />
-          </label>
-          <button type="button" onClick={close} aria-label="Close quick navigation">
-            esc
-          </button>
-        </header>
-        <nav ref={resultsRef} className="command-links" aria-label="Command navigation">
-          {showGuestbookAction && (
-            <>
-              <span className="command-group-label command-group-label-first">actions</span>
-              <button
-                type="button"
-                data-command-item="write-guestbook-entry"
-                onClick={() => {
-                  close();
-                  guestbookDialogRef.current.showModal();
+      <dialog
+        ref={dialogRef}
+        className="command-menu"
+        aria-label="Quick navigation"
+        onClick={(event) => event.target === event.currentTarget && close()}
+      >
+        <div className="command-panel">
+          <header className="command-header">
+            <label className="command-search">
+              <strong>&gt;_</strong>
+              <input
+                ref={inputRef}
+                type="search"
+                value={query}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setHovered(null);
                 }}
-                onMouseEnter={() => setHovered("write-guestbook-entry")}
+                onKeyDown={openActiveResult}
+                placeholder="Search commands"
+                aria-label="Search commands"
+              />
+            </label>
+            <button type="button" onClick={close} aria-label="Close quick navigation">
+              esc
+            </button>
+          </header>
+          <nav ref={resultsRef} className="command-links" aria-label="Command navigation">
+            {showGuestbookAction && (
+              <>
+                <span className="command-group-label command-group-label-first">actions</span>
+                <button
+                  type="button"
+                  data-command-item="write-guestbook-entry"
+                  onClick={() => {
+                    close();
+                    guestbookDialogRef.current.showModal();
+                  }}
+                  onMouseEnter={() => setHovered("write-guestbook-entry")}
+                  onMouseLeave={() => setHovered(null)}
+                >
+                  <span className="command-social-mark" aria-hidden="true">+</span>
+                  <span>Write Guestbook Entry</span>
+                  <span aria-hidden="true">↵</span>
+                </button>
+              </>
+            )}
+            {socialResults.length > 0 && (
+              <span className="command-group-label">connect</span>
+            )}
+            {socialResults.map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                data-command-item={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                onClick={close}
+                onMouseEnter={() => setHovered(href)}
                 onMouseLeave={() => setHovered(null)}
               >
-                <span className="command-social-mark" aria-hidden="true">+</span>
-                <span>Write Guestbook Entry</span>
+                <span className="command-social-mark" aria-hidden="true">↗</span>
+                <span>{label}</span>
                 <span aria-hidden="true">↵</span>
-              </button>
-            </>
-          )}
-          {socialResults.length > 0 && (
-            <span className="command-group-label">connect</span>
-          )}
-          {socialResults.map(({ label, href }) => (
-            <a
-              key={label}
-              href={href}
-              data-command-item={href}
-              target={href.startsWith("http") ? "_blank" : undefined}
-              rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-              onClick={close}
-              onMouseEnter={() => setHovered(href)}
-              onMouseLeave={() => setHovered(null)}
-            >
-              <span className="command-social-mark" aria-hidden="true">↗</span>
-              <span>{label}</span>
-              <span aria-hidden="true">↵</span>
-            </a>
-          ))}
-          {navigationResults.length > 0 && (
-            <span className="command-group-label">navigate</span>
-          )}
-          {navigationResults.map(({ label, href, shortcut }) => (
-            <a
-              key={label}
-              href={href}
-              data-command-item={href}
-              onClick={close}
-              onMouseEnter={() => setHovered(href)}
-              onMouseLeave={() => setHovered(null)}
-            >
-              <kbd>{shortcut}</kbd>
-              <span>{label}</span>
-              <span aria-hidden="true">↵</span>
-            </a>
-          ))}
-          {!showGuestbookAction && navigationResults.length === 0 && socialResults.length === 0 && (
-            <p className="command-empty" role="status">No commands found</p>
-          )}
-        </nav>
-      </div>
-    </dialog>
-    <dialog
-      ref={guestbookDialogRef}
-      className="command-menu guestbook-dialog"
-      aria-label="Write guestbook entry"
-      onClick={(event) => event.target === event.currentTarget && event.currentTarget.close()}
-    >
-      <div className="command-panel guestbook-dialog-panel">
-        <header className="command-header">
-          <strong>&gt;_ write guestbook entry</strong>
-          <button type="button" onClick={() => guestbookDialogRef.current.close()} aria-label="Close guestbook">
-            esc
-          </button>
-        </header>
-        <div className="guestbook-dialog-body">
-          <Guestbook />
+              </a>
+            ))}
+            {navigationResults.length > 0 && (
+              <span className="command-group-label">navigate</span>
+            )}
+            {navigationResults.map(({ label, href, shortcut }) => (
+              <a
+                key={label}
+                href={href}
+                data-command-item={href}
+                onClick={close}
+                onMouseEnter={() => setHovered(href)}
+                onMouseLeave={() => setHovered(null)}
+              >
+                <kbd>{shortcut}</kbd>
+                <span>{label}</span>
+                <span aria-hidden="true">↵</span>
+              </a>
+            ))}
+            {!showGuestbookAction && navigationResults.length === 0 && socialResults.length === 0 && (
+              <p className="command-empty" role="status">No commands found</p>
+            )}
+          </nav>
         </div>
-      </div>
-    </dialog>
+      </dialog>
+      <dialog
+        ref={guestbookDialogRef}
+        className="command-menu guestbook-dialog"
+        aria-label="Write guestbook entry"
+        onClick={(event) => event.target === event.currentTarget && event.currentTarget.close()}
+      >
+        <div className="command-panel guestbook-dialog-panel">
+          <header className="command-header">
+            <strong>&gt;_ write guestbook entry</strong>
+            <button type="button" onClick={() => guestbookDialogRef.current.close()} aria-label="Close guestbook">
+              esc
+            </button>
+          </header>
+          <div className="guestbook-dialog-body">
+            <Guestbook />
+          </div>
+        </div>
+      </dialog>
     </>
   );
 }

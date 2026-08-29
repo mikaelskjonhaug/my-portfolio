@@ -1,5 +1,5 @@
 import { Baby } from "lucide-react";
-import EntryDropdown from "./entry-dropdown";
+import EntryDropdown from "../components/entry-dropdown";
 import dungeonLogo from "../assets/dungeonart.jpg";
 import snakeLogo from "../assets/snakelogo.jpg";
 import riscvCpu from "../assets/RISCVcpu.jpg";
@@ -19,7 +19,7 @@ const projects = [
     type: "Model training",
     tools: ["Python", "PyTorch", "Transformers"],
     overview: "Full fine-tune of Qwen2.5-0.5B-Instruct on ML exam multiple-choice questions, improving accuracy 2x while preserving general reasoning.",
-  },  
+  },
   {
     logo: Baby,
     title: "Beebo",

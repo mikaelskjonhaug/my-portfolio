@@ -1,10 +1,10 @@
 import "./index.css";
 import CommandMenu from "./components/command-menu.jsx";
-import Experience from "./components/experience.jsx";
-import Guestbook from "./components/guestbook.jsx";
-import Hero from "./components/hero.jsx";
-import Projects from "./components/projects.jsx";
-import Skills from "./components/skills.jsx";
+import Experience from "./sections/experience.jsx";
+import Guestbook from "./sections/guestbook.jsx";
+import Hero from "./sections/hero.jsx";
+import Projects from "./sections/projects.jsx";
+import Skills from "./sections/skills.jsx";
 import { posts } from "./blog/index.js";
 
 const links = ["Blog", "Experience", "Projects", "Skills", "Guestbook"];
