@@ -1061,6 +1061,10 @@ button:focus-visible {
     gap: 0.35rem;
   }
 
+  .hero-activity-owner {
+    display: none;
+  }
+
   .portfolio-section {
     scroll-margin-top: 4rem;
     padding: 4rem 0;

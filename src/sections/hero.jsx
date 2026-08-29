@@ -120,11 +120,14 @@ export default function Hero({ name, socialLinks }) {
                   in{" "}
                   <a
                     className="hero-activity-repo"
-                    href={`https://github.com/mikaelskjonhaug/${encodeURIComponent(activity.publicRepositories[0].name)}`}
+                    href={`https://github.com/${encodeURI(activity.publicRepositories[0].name)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {activity.publicRepositories[0].name}
+                    <span className="hero-activity-owner">
+                      {activity.publicRepositories[0].name.split("/")[0]}/
+                    </span>
+                    {activity.publicRepositories[0].name.split("/").slice(1).join("/")}
                   </a>
                   {","}
                 </span>
@@ -137,11 +140,14 @@ export default function Hero({ name, socialLinks }) {
                   in{" "}
                   <a
                     className="hero-activity-repo"
-                    href={`https://github.com/mikaelskjonhaug/${encodeURIComponent(repositoryName)}`}
+                    href={`https://github.com/${encodeURI(repositoryName)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {repositoryName}
+                    <span className="hero-activity-owner">
+                      {repositoryName.split("/")[0]}/
+                    </span>
+                    {repositoryName.split("/").slice(1).join("/")}
                   </a>
                   {","}
                 </span>
