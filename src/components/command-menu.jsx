@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Command } from "lucide-react";
 import Guestbook from "../sections/guestbook.jsx";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -106,8 +107,7 @@ export default function CommandMenu({ links, socialLinks }) {
         <span className="command-trigger-label">command menu</span>
         <span className="command-trigger-label-mobile">tap to open command menu</span>
         <span className="command-trigger-shortcut" aria-label={`${shortcutModifier} plus K`}>
-          <kbd>{shortcutModifier}</kbd>
-          <span aria-hidden="true">+</span>
+          <kbd>{shortcutModifier === "⌘" ? <Command aria-hidden="true" /> : shortcutModifier}</kbd>
           <kbd>K</kbd>
         </span>
       </button>

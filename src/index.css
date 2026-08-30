@@ -177,7 +177,12 @@ button:focus-visible {
 }
 
 .command-trigger-shortcut kbd:first-child {
-  font-size: 1.3rem;
+  font-size: 0.75rem;
+}
+
+.command-trigger-shortcut kbd:first-child svg {
+  width: 0.9rem;
+  height: 0.9rem;
 }
 
 .command-menu {
